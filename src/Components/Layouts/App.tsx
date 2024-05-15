@@ -1,10 +1,19 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Box, Flex, Text } from '@chakra-ui/react'
+import React, { PropsWithChildren } from 'react'
 
-export default function AppLayout() {
+export type AppLayoutProps = {}
+
+export default function AppLayout({children}:PropsWithChildren<AppLayoutProps>) {
   return (
-    <div>
-      <Outlet />
-    </div>
+    <Box width='100vw' height='100vh'>
+      <Box width='100vw' height='30px' className='titlebar'>
+        <Flex align='center'>
+          <Text marginLeft='1em'paddingTop='2px'>Magian Launcher</Text>
+        </Flex>
+      </Box>
+      <Flex align='center' justify='center'>
+        {children}
+      </Flex>
+    </Box>
   )
 }
