@@ -1,6 +1,6 @@
 import { AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Switch, Text } from "@chakra-ui/react"
-import Addon from "../../lib/data/Addon"
 import { useState } from "react"
+import Addon from "../../lib/data/Addon"
 
 export type AddonElementProps = {
   addon: Addon
@@ -8,13 +8,13 @@ export type AddonElementProps = {
 
 export default function AddonElement({addon}:AddonElementProps) {
   const [addonEnabled, setAddonEnabled] = useState(false)
-  return <AccordionItem>
+  return <AccordionItem >
     <h2>
-      <AccordionButton>
+      <AccordionButton _hover={{transform: '', opacity: 1}}>
         <Box as="span" flex='1' textAlign='left'>
           {addon.Name}
         </Box>
-        <Switch isChecked={addonEnabled} onChange={() => setAddonEnabled(! addonEnabled)} />
+        <Switch isChecked={addonEnabled} onChange={() => setAddonEnabled(! addonEnabled)} colorScheme="orange"/>
         <AccordionIcon />
       </AccordionButton>
     </h2>
