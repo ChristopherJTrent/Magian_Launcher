@@ -1,3 +1,5 @@
+import { generateRegistry } from "./registry"
+
 /* eslint-disable no-useless-computed-key */
 const retail = (name:string) => ({
   ashita: {
@@ -28,11 +30,9 @@ const retail = (name:string) => ({
       ['pointers.use_overrides']: 1,
       ['resources.use_overrides']: 1
     },
-    window: {
-      startpos: {
-        x: -1,
-        y: -1,
-      }
+    'window.startpos': {
+      x: -1,
+      y: -1,
     },
     input: {
       ['gamepad.allowbackground']: 1,
@@ -63,8 +63,10 @@ const retail = (name:string) => ({
       ['presentparams.fullscreen_presentationinterval']: -1,
       ['behaviorflags.fpu_preserve']: 0,
     },
-    registry:{
-      padsin000: '-1,-1,13,-1,10,0,14,3,2,-1,-1,-1,-1,-33,-33,32,32,-36,-36,35,35,6,7,5,4,-1,-1'
+    registry: { ...generateRegistry([]),
+      padmode000: '1,1,0,0,0,1',
+      padsin000: '-1,-1,13,-1,10,0,14,3,2,-1,-1,-1,-1,-33,-33,32,32,-36,-36,35,35,6,7,5,4,-1,-1',
+      padguid000: '-1'
     }
   }
 })
