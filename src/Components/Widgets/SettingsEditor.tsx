@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, Box } from "@chakra-ui/react"
 import retail from "../../lib/util/Config/DefaultConfiguration"
 import SettingsRow from "./SettingsRow"
+import GamepadEditor from "./GamepadEditor"
 
 
 
@@ -19,6 +20,7 @@ export default function SettingsEditor() {
   }
   return (
       <Box scrollBehavior='smooth' overflowY='scroll' height='80vh'>
+          <GamepadEditor />
           {
             Object.entries(settings).map(([k, v]) => (
               <>
