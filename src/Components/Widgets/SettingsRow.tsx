@@ -1,16 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { AccordionPanel, ButtonGroup, Editable, EditableInput, EditablePreview, Flex, IconButton, useColorModeValue, useEditableControls } from "@chakra-ui/react"
 import {CheckIcon, CloseIcon, EditIcon} from '@chakra-ui/icons'
+import { useAppDispatch } from "../../lib/store/store"
+import { setValue } from "../../lib/store/AshitaSettingsReducer"
 
 export type SettingsRowProps = {
   k0: string
   k1: string
   k2: string
   value: any
-  overrideSettings: (k0:string, k1: string,k2: string, value: any) => void
 }
 
-export default function SettingsRow({k0, k1, k2, value, overrideSettings}:SettingsRowProps) {
+export default function SettingsRow({k0, k1, k2, value}:SettingsRowProps) {
+  const dispatch = useAppDispatch()
   // eslint-disable-next-line react/no-unstable-nested-components
   function EditableControls() {
     const {
@@ -33,7 +35,12 @@ export default function SettingsRow({k0, k1, k2, value, overrideSettings}:Settin
     <h2 style={{textTransform: 'capitalize'}}>{k2}:</h2>
     <Editable defaultValue={value as string}
       onSubmit={(nextvalue: string):void => {
-        overrideSettings(k0, k1, k2, nextvalue)
+        dispatch(setValue({
+          k0,
+          k1,
+          k2,
+          value: nextvalue
+        }))
       }}
       width='100%'>
       <Flex direction='row' justifyContent='space-between'>

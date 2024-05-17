@@ -1,23 +1,14 @@
-import { useState } from "react"
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, Box } from "@chakra-ui/react"
-import retail from "../../lib/util/Config/DefaultConfiguration"
 import SettingsRow from "./SettingsRow"
 import GamepadEditor from "./GamepadEditor"
+import { RootState, useAppSelector } from "../../lib/store/store"
+import { AshitaSettings } from "../../lib/store/AshitaSettingsReducer"
 
 
 
 export default function SettingsEditor() {
-  const [settings, setSettings] = useState(retail('magian'))
-  function overrideSettings(k0:string, k1: string, k2:string, value:any): void {
-    const v = settings
-    const v1 = v[k0 as keyof typeof settings]
-    // THIS WORKS. DO NOT FIX THE ERROR.
-    // THESE KEYS ARE GENERATED VALUES,
-    // TYPESCRIPT IS JUST TOO DUMB TO SEE IT
-    const v2:any = v1[k1]
-    const replacementValue = {...v, [k0]: {...v1, [k1]: {...v2, [k2]: value}}}
-    setSettings((replacementValue))
-  }
+	const settings = useAppSelector((state:RootState):AshitaSettings => state.ashitaSettings)
+	 
   return (
       <Box scrollBehavior='smooth' overflowY='scroll' height='80vh'>
           <GamepadEditor />
@@ -41,10 +32,7 @@ export default function SettingsEditor() {
                       k0={k}
                       k1={k1}
                       k2={k2}
-                      value={v2}
-                      // There's no way to make this work without binding. I don't care.
-                      // eslint-disable-next-line react/jsx-no-bind
-                      overrideSettings={overrideSettings} />
+                      value={v2} />
                     ))}
                   </AccordionItem>
                 ))}
