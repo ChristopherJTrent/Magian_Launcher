@@ -1,24 +1,30 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, Box } from "@chakra-ui/react"
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, Box, Switch } from "@chakra-ui/react"
+import { useState } from "react"
 import SettingsRow from "./SettingsRow"
-import GamepadEditor from "./GamepadEditor"
 import { RootState, useAppSelector } from "../../lib/store/store"
 import { AshitaSettings } from "../../lib/store/AshitaSettingsReducer"
 
 
 
 export default function SettingsEditor() {
+  const advancedRows = ['taskpool','logging', 'resources', 'direct3d8', 'registry']
 	const settings = useAppSelector((state:RootState):AshitaSettings => state.ashitaSettings)
-	 
+	const [advanced, setAdvanced] = useState(false)
   return (
       <Box scrollBehavior='smooth' overflowY='scroll' height='80vh'>
-          <GamepadEditor />
+          Enable Advanced Settings:&nbsp;
+          <Switch
+            isChecked={advanced}
+            onChange={() => setAdvanced(! advanced)} 
+            colorScheme="orange"/>
           {
             Object.entries(settings).map(([k, v]) => (
               <>
-                <h2 style={{textTransform: 'capitalize'}}>{k}</h2>
+                {(advanced || k === 'ashita') && <h2 style={{textTransform: 'capitalize'}}>{k}</h2>}
                 <Accordion allowToggle allowMultiple>
-                  {Object.entries(v).map(([k1,v1]) => (
-                    <AccordionItem>
+                  {Object.entries(v).map(([k1,v1]) => 
+                    { if (advanced || !advancedRows.includes(k1)) {
+                      return <AccordionItem>
                       <h2>
                         <AccordionButton>
                           <Box as='span' flex='1' textAlign='left' textTransform="capitalize" fontSize='larger' fontWeight='600'>
@@ -34,8 +40,11 @@ export default function SettingsEditor() {
                       k2={k2}
                       value={v2} />
                     ))}
-                  </AccordionItem>
-                ))}
+                  </AccordionItem>}
+                    // eslint-disable-next-line react/jsx-no-useless-fragment
+                    return <></>
+                  }
+                )}
                 </Accordion>
               </>
             ))
