@@ -29,4 +29,6 @@ export const gamepadSlice = createSlice({
   }
 })
 
+export const {setToggle, setBinding} = gamepadSlice.actions
+
 export default gamepadSlice.reducer

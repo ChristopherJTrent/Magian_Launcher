@@ -1,28 +1,30 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { EditIcon } from "@chakra-ui/icons"
 import { Button, Flex, Switch } from "@chakra-ui/react"
-import React, { useState } from "react"
+import { useAppDispatch, useAppSelector } from "../../lib/store/store"
+import { setToggle } from "../../lib/store/GamepadSettings"
 
 export default function GamepadEditor() {
-  const [gamepadSettings, setGamepadSettings] = useState([0,0,0,0,0,0])
-  function setFlag(index:number, evt: React.ChangeEvent<HTMLInputElement>) {
-    const temp = gamepadSettings
-    temp[index] = gamepadSettings[index] === 0 ? 1 : 0
-    console.log(temp)
-    setGamepadSettings(temp)
-  }
+  const flags = useAppSelector((state) => state.gamepad.toggles)
+  const dispatch = useAppDispatch()
   return <>
   <Button>Gamepad Settings <EditIcon /></Button>
 	<Flex direction='row' flexWrap='wrap' justifyContent='space-around'>
 		<label>Enable Gamepad
 		  <Switch id="enableGamepad" 
-        isChecked={gamepadSettings[0] == 1}
-        onChange={(e) =>  setFlag(0, e)}/>
+        isChecked={flags.enabled}
+        onChange={() => dispatch(setToggle({
+          name:'enabled',
+          value: !flags.enabled
+        }))}/>
     </label>
     <label> Enable Rumble
       <Switch 
-        isChecked={gamepadSettings[1] === 1}
-        onChange={(e) => setFlag(1, e)} />
+        isChecked={flags.rumble}
+        onChange={() => dispatch(setToggle({
+          name:'rumble',
+          value: !flags.rumble
+        }))} />
     </label>
 	</Flex>
   </>
