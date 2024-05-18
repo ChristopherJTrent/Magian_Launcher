@@ -1,3 +1,4 @@
+import { GamepadState } from "../../store/GamepadState"
 import { generateRegistry } from "./registry"
 
 /* eslint-disable no-useless-computed-key */
@@ -70,5 +71,45 @@ const retail = (name:string) => ({
     }
   }
 })
+
+export const xinputDefault:GamepadState = {
+  toggles: {
+    enabled: true,
+    rumble: false,
+    sliders: false,
+    hats: true,
+    inactive: true,
+    xinput: true,
+  },
+  bindings: {
+    autorun: -1,
+    macroCtrl: -1,
+    changeView: 13,
+    macroAlt: -1,
+    lockOn: 10,
+    cancel: 0,
+    mainMenu: 14,
+    confirm: 3,
+    activeWindow: 2,
+    toggleUi: -1,
+    moveToMenu: -1,
+    moveToCamera: -1,
+    logout: -1,
+    moveForward: -33,
+    moveBackward: -33,
+    moveLeft: 32,
+    moveRight:32,
+    cameraUp: -36,
+    cameraDown: -36,
+    cameraLeft: 35,
+    cameraRight: 35,
+    menuUp: 6,
+    menuDown: 7,
+    menuLeft: 5,
+    menuRight: 4,
+    screenshot: -1,
+    toggleMove: -1,
+  }
+}
 
 export default retail

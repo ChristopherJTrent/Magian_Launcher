@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { useDispatch, useSelector } from "react-redux"
 import AshitaSettingsReducer from "./AshitaSettingsReducer"
+import GamepadSettings from "./GamepadSettings"
 
 export const store = configureStore({
 	reducer: {
-		ashitaSettings: AshitaSettingsReducer
+		ashitaSettings: AshitaSettingsReducer,
+    gamepad: GamepadSettings
 	}
 })
 
