@@ -12,9 +12,12 @@ module.exports = {
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'error',
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
     semi: ['error', 'never'],
     'prettier/prettier': 0,
+    '@typescript-eslint/no-unused-vars': ['error', {
+			argsIgnorePattern: '^_',
+			ignoreRestSiblings: true,
+		}],
   },
   parserOptions: {
     ecmaVersion: 2022,
