@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Editable, Flex, Select, Switch } from "@chakra-ui/react"
 import { useAppDispatch, useAppSelector } from "../../lib/store/store"
-import { setToggle } from "../../lib/store/GamepadSettings"
+import { setBinding, setToggle } from "../../lib/store/GamepadSettings"
 import { DInputBindings, DInputButtons, XInputBindings, XInputButtons } from "../../lib/util/Config/RegistryDefinition"
 
 type UIDef = {
@@ -47,7 +47,7 @@ const bindingUIDefs:UIDef[] = [
     key: 'macroCtrl',
     label: 'Macro Palette (CTRL)'
   },
-  
+
 ]
 export default function GamepadEditor() {
 
@@ -77,11 +77,18 @@ export default function GamepadEditor() {
         bindingUIDefs.map((v) => (
           <>
             <h2>{v.label}:</h2>
-            <Select variant='outline'>
+            <Select variant='outline'
+              value={bindings[v.key as keyof typeof bindings]}
+              onChange={(e) => {
+                dispatch(setBinding({
+                  name:v.key,
+                  value: Number(e.target.value) // this will always be a number.
+              }))
+            }}>
               {
-                Object.entries(flags.xinput ? XInputButtons : DInputButtons).map(([k, v1]) => (
+                Object.entries(flags.xinput ? XInputButtons : DInputButtons).map(([_, v1]) => (
                   <option value={v1}>{
-                    flags.xinput 
+                    flags.xinput
                       ? XInputBindings[v1 as keyof typeof XInputBindings]
                       : DInputBindings[v1 as keyof typeof DInputBindings]
                     }</option>
@@ -92,5 +99,5 @@ export default function GamepadEditor() {
         ))
       }
     </Flex>
-  </> 
+  </>
 }
