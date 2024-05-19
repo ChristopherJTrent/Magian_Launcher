@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { AccordionPanel, ButtonGroup, Editable, EditableInput, EditablePreview, Flex, IconButton, useColorModeValue, useEditableControls } from "@chakra-ui/react"
-import {CheckIcon, CloseIcon, EditIcon} from '@chakra-ui/icons'
+import { AccordionPanel, Editable, EditableInput, EditablePreview, Flex, useColorModeValue } from "@chakra-ui/react"
 import { useAppDispatch } from "../../lib/store/store"
 import { setValue } from "../../lib/store/AshitaSettingsReducer"
+import EditableControls from "./EditableControls"
 
 export type SettingsRowProps = {
   k0: string
@@ -14,22 +14,6 @@ export type SettingsRowProps = {
 export default function SettingsRow({k0, k1, k2, value}:SettingsRowProps) {
   const dispatch = useAppDispatch()
   // eslint-disable-next-line react/no-unstable-nested-components
-  function EditableControls() {
-    const {
-      isEditing,
-      getSubmitButtonProps,
-      getCancelButtonProps,
-      getEditButtonProps,
-    } = useEditableControls()
-    return isEditing ? (
-      <ButtonGroup>
-        <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} aria-label={`set ${k2}`} />
-        <IconButton icon={<CloseIcon boxSize={3} />} {...getCancelButtonProps()} aria-label='Cancel' />
-      </ButtonGroup>
-    ) : (
-      <IconButton size='sm' icon={<EditIcon />} {...getEditButtonProps()} aria-label='Edit'/>
-    )
-  }
   return <AccordionPanel>
   <Flex direction='row' align='center'>
     <h2 style={{textTransform: 'capitalize'}}>{k2}:</h2>
