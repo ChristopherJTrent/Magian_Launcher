@@ -8,7 +8,7 @@ export default function AppLayout({children}:PropsWithChildren<AppLayoutProps>) 
     <Box width='100vw' height='100vh'>
       <Box width='100vw' height='30px' className='titlebar'>
         <Flex align='center'>
-          <Text marginLeft='1em'paddingTop='2px'>Magian Launcher</Text>
+          <Text marginLeft='1em' paddingTop='2px'>Magian Launcher</Text>
         </Flex>
       </Box>
       <Flex align='center' justify='center'>
