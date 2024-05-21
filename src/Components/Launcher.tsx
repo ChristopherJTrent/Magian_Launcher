@@ -4,8 +4,22 @@ import DummyAddons from "../lib/data/Dummy"
 import AppLayout from "./Layouts/App"
 import SettingsEditor from "./Widgets/SettingsEditor"
 import GamepadEditor from "./Widgets/GamepadEditor"
+import { dumpINI } from "../lib/util/Config/INIHelper"
+import retail from "../lib/util/Config/DefaultConfiguration"
+import getGamepadRegistrySegment from "../lib/store/registrySelector"
+import { useAppSelector } from "../lib/store/store"
 
 export default function Launcher() {
+  const retailObj = retail('example')
+  const obj = useAppSelector((state) => ({...retailObj,
+    ffxi:{
+      ...retailObj.ffxi,
+      registry: {
+        ...retailObj.ffxi.registry,
+        ...getGamepadRegistrySegment(state.gamepad)
+      }
+    }
+  }))
   return (
   <AppLayout>
     <Tabs width='90%' colorScheme="orange">
@@ -17,7 +31,7 @@ export default function Launcher() {
       </TabList>
       <TabPanels>
         <TabPanel>
-          Coming Soon!
+          {dumpINI(obj)}
         </TabPanel>
         <TabPanel>
           <AddonListing addons={DummyAddons}/>
