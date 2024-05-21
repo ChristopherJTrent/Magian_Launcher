@@ -14,7 +14,7 @@ import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
 import MenuBuilder from './menu'
 import { resolveHtmlPath } from './util'
-import { hasGit } from '../lib/util/paths'
+import { hasGit } from '../lib/util/Installation/paths'
 
 class AppUpdater {
   constructor() {
@@ -93,7 +93,7 @@ const createWindow = async () => {
       dialog.showErrorBox('Fatal: Git is required.', 'Git is required for Magian Launcher to run. Please install "Git for Windows" and try again.')
       mainWindow?.close()
     }
-  }).catch(() => {window.close()})
+  }).catch(() => {throw new Error("Exception Occurred while checking for Git installation.")})
 
   mainWindow.loadURL(resolveHtmlPath('index.html'))
 
