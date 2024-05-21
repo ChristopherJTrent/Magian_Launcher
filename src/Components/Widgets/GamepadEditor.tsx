@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Editable, Flex, Select, Switch } from "@chakra-ui/react"
+import { Flex, Select, Switch } from "@chakra-ui/react"
 import { useAppDispatch, useAppSelector } from "../../lib/store/store"
 import { setBinding, setToggle } from "../../lib/store/GamepadSettings"
 import { DInputBindings, DInputButtons, XInputBindings, XInputButtons } from "../../lib/util/Config/RegistryDefinition"
@@ -47,7 +47,106 @@ const bindingUIDefs:UIDef[] = [
     key: 'macroCtrl',
     label: 'Macro Palette (CTRL)'
   },
-
+  {
+    key: 'changeView',
+    label: 'Toggle First/Third person view'
+  },
+  {
+    key: 'macroAlt',
+    label: 'Macro Palette (Alt)'
+  },
+  {
+    key: 'lockOn',
+    label: 'Lock Target / heal'
+  },
+  {
+    key: 'cancel',
+    label: 'Cancel'
+  },
+  {
+    key: 'mainMenu',
+    label: 'Main Menu'
+  },
+  {
+    key: 'confirm',
+    label: 'Confirm'
+  },
+  {
+    key: 'activeWindow',
+    label: 'Active Window (Chat/Buffs)'
+  },
+  {
+    key: 'toggleUi',
+    label: 'Toggle UI'
+  },
+  {
+    key: 'moveToMenu',
+    label: 'Hold to use Move for Menu'
+  },
+  {
+    key: 'moveToCamera',
+    label: 'Hold to use Move for Camera'
+  },
+  {
+    key: 'logout',
+    label: 'Log Out'
+  },
+  {
+    key: 'moveFoward',
+    label: 'Move Forward'
+  },
+  {
+    key: 'moveBackward',
+    label: 'Move Backward'
+  },
+  {
+    key: 'moveLeft',
+    label: 'Move Left'
+  },
+  {
+    key: 'moveRight',
+    label: 'Move Right'
+  },
+  {
+    key: 'cameraUp',
+    label: 'Camera Up'
+  },
+  {
+    key: 'cameraDown',
+    label: 'Camera Down'
+  },
+  {
+    key: 'cameraLeft',
+    label: 'Camera Left'
+  },
+  {
+    key: 'cameraRight',
+    label: 'Camera Right'
+  },
+  {
+    key: 'menuUp',
+    label: 'Menu Up'
+  },
+  {
+    key: 'menuDown',
+    label: 'Menu Down'
+  },
+  {
+    key: 'menuLeft',
+    label: 'Menu Left'
+  },
+  {
+    key: 'menuRight',
+    label: 'Menu Right'
+  },
+  {
+    key: 'screenshot',
+    label: 'Take a Screenshot'
+  },
+  {
+    key: 'toggleMove',
+    label: 'Toggle Movement'
+  }
 ]
 export default function GamepadEditor() {
 
@@ -57,7 +156,9 @@ export default function GamepadEditor() {
   const bindings = useAppSelector((state) => state.gamepad.bindings)
   const dispatch = useAppDispatch()
   return <>
-    <Flex direction='row' flexWrap='wrap' justifyContent='space-around'>
+    <Flex direction='row' flexWrap='wrap' justifyContent='space-around' height='18vh'>
+      <h2 style={{fontSize:'1.4em'}}>Controller Settings</h2>
+      <div style={{width: '100%'}} />
       {
         toggleUIDefs.map((v) => (
           <label style={{width: '45%'}}>
@@ -72,7 +173,9 @@ export default function GamepadEditor() {
         ))
       }
     </Flex>
-    <Flex direction='column' alignContent='center'>
+    <Flex direction='column' alignContent='center' overflowY='scroll' height='67vh'>
+      <h1 style={{fontSize: '1.4em'}}>Controller Bindings</h1>
+      <hr/>
       {
         bindingUIDefs.map((v) => (
           <>
