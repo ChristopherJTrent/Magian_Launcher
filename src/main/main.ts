@@ -9,11 +9,12 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path'
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
 import MenuBuilder from './menu'
 import { resolveHtmlPath } from './util'
+import { hasGit } from '../lib/util/paths'
 
 class AppUpdater {
   constructor() {
@@ -86,6 +87,14 @@ const createWindow = async () => {
       height: 30,
     }
   })
+
+  let failed = false
+  hasGit().then((v) => {
+    if (!v) {
+      dialog.showErrorBox('Fatal: Git is required.', 'Git is required for Magian Launcher to run. Please install "Git for Windows" and try again.')
+      mainWindow?.close()
+    }
+  }).catch(() => {window.close()})
 
   mainWindow.loadURL(resolveHtmlPath('index.html'))
 

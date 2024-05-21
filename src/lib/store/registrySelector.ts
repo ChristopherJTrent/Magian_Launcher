@@ -1,5 +1,5 @@
 import { GamepadState } from "./GamepadState"
-import { store } from "./store"
+import { RootState} from "./store"
 
 
 function getPadmode000(gpState:GamepadState) {
@@ -17,10 +17,21 @@ function getPadmode000(gpState:GamepadState) {
     boolToToggle(toggles.xinput)
   ].join(',')
 }
-
 export default function getGamepadRegistrySegment(state: GamepadState) {
   return {
     padmode000: getPadmode000(state),
-    padins000: Object.values(state.bindings).join(',')
+    padsin000: Object.values(state.bindings).join(',')
   }
 }
+
+export const configurationSelector = (retailObj:any) => (state:RootState) => ({
+  ...retailObj,
+    ffxi:{
+      ...retailObj.ffxi,
+      registry: {
+        ...retailObj.ffxi.registry,
+        ...getGamepadRegistrySegment(state.gamepad)
+      }
+    }
+})
+
