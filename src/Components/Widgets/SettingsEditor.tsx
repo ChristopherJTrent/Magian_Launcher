@@ -19,12 +19,12 @@ export default function SettingsEditor() {
             colorScheme="orange"/>
           {
             Object.entries(settings).map(([k, v]) => (
-              <>
+              <div key={k}>
                 {(advanced || k === 'ashita') && <h2 style={{textTransform: 'capitalize'}}>{k}</h2>}
-                <Accordion allowToggle allowMultiple>
+                <Accordion allowMultiple>
                   {Object.entries(v).map(([k1,v1]) => 
                     { if (advanced || !advancedRows.includes(k1)) {
-                      return <AccordionItem>
+                      return <AccordionItem key={k1}>
                       <h2>
                         <AccordionButton>
                           <Box as='span' flex='1' textAlign='left' textTransform="capitalize" fontSize='larger' fontWeight='600'>
@@ -38,15 +38,15 @@ export default function SettingsEditor() {
                       k0={k}
                       k1={k1}
                       k2={k2}
-                      value={v2} />
+                      value={v2} key={k2}/>
                     ))}
                   </AccordionItem>}
                     // eslint-disable-next-line react/jsx-no-useless-fragment
-                    return <></>
+                    return undefined
                   }
                 )}
                 </Accordion>
-              </>
+              </div>
             ))
           }
       </Box>

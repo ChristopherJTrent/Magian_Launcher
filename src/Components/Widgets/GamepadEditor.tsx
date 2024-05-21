@@ -189,8 +189,8 @@ export default function GamepadEditor() {
               }))
             }}>
               {
-                Object.entries(flags.xinput ? XInputButtons : DInputButtons).map(([_, v1]) => (
-                  <option value={v1}>{
+                Object.entries(flags.xinput ? XInputButtons : DInputButtons).map(([k1, v1]) => (
+                  <option value={v1} key={k1}>{
                     flags.xinput
                       ? XInputBindings[v1 as keyof typeof XInputBindings]
                       : DInputBindings[v1 as keyof typeof DInputBindings]
