@@ -88,7 +88,6 @@ const createWindow = async () => {
     }
   })
 
-  let failed = false
   hasGit().then((v) => {
     if (!v) {
       dialog.showErrorBox('Fatal: Git is required.', 'Git is required for Magian Launcher to run. Please install "Git for Windows" and try again.')

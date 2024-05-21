@@ -19,13 +19,13 @@ export const gamepadSlice = createSlice({
   initialState,
   reducers: {
     setToggle: (state: GamepadState, action: PayloadAction<setToggleParams>) => {
-      state.toggles[action.payload.name as keyof typeof state.toggles] 
+      state.toggles[action.payload.name as keyof typeof state.toggles]
         = action.payload.value
     },
     setBinding: (state: GamepadState, action: PayloadAction<setBindingParams>) => {
-      state.bindings[action.payload.name as keyof typeof state.bindings] 
+      state.bindings[action.payload.name as keyof typeof state.bindings]
         = action.payload.value
-    }
+    },
   }
 })
 
