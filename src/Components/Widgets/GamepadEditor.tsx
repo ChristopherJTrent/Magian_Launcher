@@ -161,7 +161,7 @@ export default function GamepadEditor() {
       <div style={{width: '100%'}} />
       {
         toggleUIDefs.map((v) => (
-          <label style={{width: '45%'}}>
+          <label style={{width: '45%'}} key={v.key}>
             <Switch
               isChecked={flags[v.key as keyof typeof flags]}
               onChange={() => dispatch(setToggle({
@@ -178,7 +178,7 @@ export default function GamepadEditor() {
       <hr/>
       {
         bindingUIDefs.map((v) => (
-          <>
+          <div key={v.key}>
             <h2>{v.label}:</h2>
             <Select variant='outline'
               value={bindings[v.key as keyof typeof bindings]}
@@ -198,7 +198,7 @@ export default function GamepadEditor() {
                 ))
               }
             </Select>
-          </>
+          </div>
         ))
       }
     </Flex>
