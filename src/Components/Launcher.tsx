@@ -4,7 +4,6 @@ import DummyAddons from "../lib/data/Dummy"
 import AppLayout from "./Layouts/App"
 import SettingsEditor from "./Widgets/SettingsEditor"
 import GamepadEditor from "./Widgets/GamepadEditor"
-import { dumpINI } from "../lib/util/Config/INIHelper"
 import retail from "../lib/util/Config/DefaultConfiguration"
 import { configurationSelector } from "../lib/store/registrySelector"
 import { useAppSelector } from "../lib/store/store"
@@ -12,6 +11,7 @@ import { useAppSelector } from "../lib/store/store"
 export default function Launcher() {
   const retailObj = retail('example')
   const obj = useAppSelector(configurationSelector(retailObj))
+  const addons = useAppSelector((state) => state.addons)
   return (
   <AppLayout>
     <Tabs width='90%' colorScheme="orange">
@@ -23,8 +23,7 @@ export default function Launcher() {
       </TabList>
       <TabPanels>
         <TabPanel>
-          <Flex overflowY='scroll' flexDirection='column' height='80vh'>
-          {dumpINI(obj).split('\n').map((v) => <div>{v}<br/></div>)}
+          <Flex overflowY='scroll' flexDirection='column' height='40vh'>
           </Flex>
         </TabPanel>
         <TabPanel>

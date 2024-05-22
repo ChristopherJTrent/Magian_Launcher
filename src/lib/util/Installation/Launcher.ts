@@ -3,8 +3,6 @@ import { INSTALL_LOCATION } from "./paths"
 
 export default function ensureInstallLocation() {
   if (!existsSync(INSTALL_LOCATION)) {
-    mkdirSync(INSTALL_LOCATION, {
-      mode: '777'
-    })
+    mkdirSync(INSTALL_LOCATION)
   }
 }

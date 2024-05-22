@@ -5,6 +5,7 @@ function saveOnClose() {
   const state = store.getState()
   if (state.flags.settingsChanged) {
     const ini = configurationSelector(state.ashitaSettings)(state)
+
   }
 }
 

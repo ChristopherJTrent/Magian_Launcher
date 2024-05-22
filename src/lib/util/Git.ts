@@ -1,6 +1,8 @@
 import { SpawnSyncOptionsWithBufferEncoding, SpawnSyncReturns, spawnSync } from "child_process"
 import { ASHITA_LOCATION } from "./Installation/paths"
 
+const ASHITA_DOWNLOAD_TIMEOUT = 30_000
+
 function spawnGitProcess(args:string[], opts?:SpawnSyncOptionsWithBufferEncoding):SpawnSyncReturns<Buffer> {
   const bat = spawnSync('git', args, {
     shell: 'powershell.exe',
@@ -38,5 +40,7 @@ export function installAshita() {
     'clone',
     'https://github.com/ashitaxi/ashita-v4beta.git',
     ASHITA_LOCATION
-  ])
+  ], {
+    timeout: ASHITA_DOWNLOAD_TIMEOUT
+  })
 }

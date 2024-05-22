@@ -4,25 +4,21 @@ import { GamepadState } from "./GamepadState"
 
 const initialState:GamepadState = xinputDefault
 
-export type setToggleParams = {
-  name: string
-  value: boolean
+export type overwriteParams<T> = {
+  name: string,
+  value: T
 }
 
-export type setBindingParams = {
-  name: string,
-  value: number
-}
 
 export const gamepadSlice = createSlice({
   name: 'gamepad',
   initialState,
   reducers: {
-    setToggle: (state: GamepadState, action: PayloadAction<setToggleParams>) => {
+    setToggle: (state: GamepadState, action: PayloadAction<overwriteParams<boolean>>) => {
       state.toggles[action.payload.name as keyof typeof state.toggles]
         = action.payload.value
     },
-    setBinding: (state: GamepadState, action: PayloadAction<setBindingParams>) => {
+    setBinding: (state: GamepadState, action: PayloadAction<overwriteParams<number>>) => {
       state.bindings[action.payload.name as keyof typeof state.bindings]
         = action.payload.value
     },

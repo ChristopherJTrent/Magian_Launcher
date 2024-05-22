@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux"
 import AshitaSettingsReducer from "./AshitaSettingsReducer"
 import GamepadSettings from "./GamepadSettings"
 import flagsReducer from "./flagsReducer"
+import addonsReducer from "./addonsReducer"
 
 export const store = configureStore({
 	reducer: {
 		ashitaSettings: AshitaSettingsReducer,
     gamepad: GamepadSettings,
-    flags: flagsReducer
+    flags: flagsReducer,
+    addons: addonsReducer
 	}
 })
 

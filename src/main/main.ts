@@ -9,12 +9,14 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path'
-import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, dialog, ipcRenderer } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
 import MenuBuilder from './menu'
 import { resolveHtmlPath } from './util'
 import { hasGit } from '../lib/util/Installation/paths'
+import { ashitaMessages } from '../lib/ipc'
+import updateAshita from '../lib/util/Installation/Ashita'
 
 class AppUpdater {
   constructor() {
@@ -30,6 +32,16 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`
   console.log(msgTemplate(arg))
   event.reply('ipc-example', msgTemplate('pong'))
+})
+
+ipcMain.on('ipc-ashita', async (event, arg) => {
+  switch(arg as ashitaMessages) {
+    case 'ensureAshitaInstall':
+      updateAshita()
+      ipcRenderer.send('ensureAshitaInstall', true)
+    break
+    default:
+  }
 })
 
 if (process.env.NODE_ENV === 'production') {
@@ -79,6 +91,7 @@ const createWindow = async () => {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
+      nodeIntegration:true
     },
     titleBarStyle: 'hidden',
     titleBarOverlay: {
@@ -87,14 +100,11 @@ const createWindow = async () => {
       height: 30,
     }
   })
-  // TODO: This isn't a promise anymore, stop treating it like one
-  hasGit().then((v) => {
-    if (!v) {
-      dialog.showErrorBox('Fatal: Git is required.', 'Git is required for Magian Launcher to run. Please install "Git for Windows" and try again.')
-      mainWindow?.close()
-    }
-  }).catch(() => {throw new Error("Exception Occurred while checking for Git installation.")})
 
+  if (!hasGit()) {
+    dialog.showErrorBox('Fatal: Git is required.', 'Git is required for Magian Launcher to run. Please install "Git for Windows" and try again.')
+    mainWindow?.close()
+  }
   mainWindow.loadURL(resolveHtmlPath('index.html'))
 
   mainWindow.on('ready-to-show', () => {

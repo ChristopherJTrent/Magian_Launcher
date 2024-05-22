@@ -22,7 +22,7 @@ export const AshitaSettingsSlice = createSlice({
 		// known any, the code works, don't mess with it.
 		const v2 = v1[action.payload.k1]
 		// We're ignoring this one too.
-		state[action.payload.k0] = {
+		state[action.payload.k0 as keyof typeof state] = {
 			...v1, [action.payload.k1 as keyof typeof v1]: {
 				...v2, [action.payload.k2]: action.payload.value
 			}
