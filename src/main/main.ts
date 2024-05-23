@@ -17,6 +17,7 @@ import { resolveHtmlPath } from './util'
 import { hasGit } from '../lib/util/Installation/paths'
 import { ashitaMessages } from '../lib/ipc'
 import updateAshita from '../lib/util/Installation/Ashita'
+import registerIPCCallbacks from './ipcHandlers'
 
 class AppUpdater {
   constructor() {
@@ -28,21 +29,7 @@ class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null
 
-ipcMain.on('ipc-example', async (event, arg) => {
-  const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`
-  console.log(msgTemplate(arg))
-  event.reply('ipc-example', msgTemplate('pong'))
-})
-
-ipcMain.on('ipc-ashita', async (event, arg) => {
-  switch(arg as ashitaMessages) {
-    case 'ensureAshitaInstall':
-      updateAshita()
-      ipcRenderer.send('ensureAshitaInstall', true)
-    break
-    default:
-  }
-})
+registerIPCCallbacks(ipcMain)
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support')

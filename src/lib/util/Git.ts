@@ -1,7 +1,7 @@
 import { SpawnSyncOptionsWithBufferEncoding, SpawnSyncReturns, spawnSync } from "child_process"
 import { ASHITA_LOCATION } from "./Installation/paths"
 
-const ASHITA_DOWNLOAD_TIMEOUT = 30_000
+const ASHITA_DOWNLOAD_TIMEOUT = 300_000
 
 function spawnGitProcess(args:string[], opts?:SpawnSyncOptionsWithBufferEncoding):SpawnSyncReturns<Buffer> {
   const bat = spawnSync('git', args, {
@@ -23,6 +23,9 @@ export function getAshitaStatus():installStatus {
   if (result.status) {
     return 'uninstalled'
   }
+  if (result.stdout == null) {
+    return 'uninstalled'
+  }
   return /up to date/.test(result.stdout.toString()) ? 'up-to-date' : 'behind'
 }
 
@@ -37,9 +40,7 @@ export function pullAshita() {
 
 export function installAshita() {
   spawnGitProcess([
-    'clone',
-    'https://github.com/ashitaxi/ashita-v4beta.git',
-    ASHITA_LOCATION
+    `clone https://github.com/ashitaxi/ashita-v4beta.git "${ASHITA_LOCATION}"`,
   ], {
     timeout: ASHITA_DOWNLOAD_TIMEOUT
   })
