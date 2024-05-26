@@ -16,6 +16,10 @@ export const AshitaSettingsSlice = createSlice({
   name: 'ashitaSettings',
   initialState,
   reducers: {
+    receiveSettings: (state:AshitaSettings, action:PayloadAction<AshitaSettings>) => {
+      // eslint-disable-next-line no-param-reassign
+      state = action.payload
+    },
     setValue: (state:AshitaSettings, action:PayloadAction<setvalArgs>) => {
 		const v = state
 		const v1 = v[action.payload.k0 as keyof typeof state]
@@ -31,6 +35,6 @@ export const AshitaSettingsSlice = createSlice({
   }
 })//
 
-export const {setValue} = AshitaSettingsSlice.actions
+export const {setValue, receiveSettings} = AshitaSettingsSlice.actions
 
 export default AshitaSettingsSlice.reducer
