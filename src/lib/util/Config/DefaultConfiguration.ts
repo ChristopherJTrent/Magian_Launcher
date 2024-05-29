@@ -27,42 +27,42 @@ const retail = (name:string) => ({
       threadcount: -1
     },
     resources: {
-      ['offsets.use_overrides']: 1,
-      ['pointers.use_overrides']: 1,
-      ['resources.use_overrides']: 1
+      'offsets.use_overrides': 1,
+      'pointers.use_overrides': 1,
+      'resources.use_overrides': 1
     },
     'window.startpos': {
       x: -1,
       y: -1,
     },
     input: {
-      ['gamepad.allowbackground']: 1,
-      ['gamepad.disableenumeration']: 0,
-      ['keyboard.blockinput']: 0,
-      ['keyboard.blockbindsduringinput']:1,
-      ['keyboard.silentbinds']: 1,
-      ['keyboard.windowskeyenabled']: 1,
-      ['mouse.blockinput']: 0,
-      ['mouse.unhook']: 1
+      'gamepad.allowbackground': 1,
+      'gamepad.disableenumeration': 0,
+      'keyboard.blockinput': 0,
+      'keyboard.blockbindsduringinput':1,
+      'keyboard.silentbinds': 1,
+      'keyboard.windowskeyenabled': 1,
+      'mouse.blockinput': 0,
+      'mouse.unhook': 1
     },
     misc: {
-      ['addons.silent']: 1,
-      ['aliases.silent']: 1,
-      ['plugins.silent']: 1
+      'addons.silent': 1,
+      'aliases.silent': 1,
+      'plugins.silent': 1
     }
   },
   ffxi: {
     direct3d8:{
-      ['presentparams.backbufferformat']: -1,
-      ['presentparams.backbuffercount']: -1,
-      ['presentparams.multisampletype']: -1,
-      ['presentparams.swapeffect']: -1,
-      ['presentparams.enableautodepthstencil']: -1,
-      ['presentparams.autodepthstencilformat']: -1,
-      ['presentparams.flags']: -1,
-      ['presentparams.fullscreen_refreshrateinhz']: -1,
-      ['presentparams.fullscreen_presentationinterval']: -1,
-      ['behaviorflags.fpu_preserve']: 0,
+      'presentparams.backbufferformat': -1,
+      'presentparams.backbuffercount': -1,
+      'presentparams.multisampletype': -1,
+      'presentparams.swapeffect': -1,
+      'presentparams.enableautodepthstencil': -1,
+      'presentparams.autodepthstencilformat': -1,
+      'presentparams.flags': -1,
+      'presentparams.fullscreen_refreshrateinhz': -1,
+      'presentparams.fullscreen_presentationinterval': -1,
+      'behaviorflags.fpu_preserve': 0,
     },
     registry: { ...generateRegistry([]),
       padmode000: '1,1,0,0,0,1',
