@@ -1,7 +1,8 @@
 import { IpcMain, IpcMainInvokeEvent } from "electron"
 import updateAshita from "../lib/util/Installation/Ashita"
+import { loadProfiles } from "../lib/util/IO/ProfileLoader"
 
-type IPCHandler = {channel: string, listener: (event:IpcMainInvokeEvent, ...args: any[]) => Promise<void>}
+type IPCHandler = {channel: string, listener: (event:IpcMainInvokeEvent, ...args: any[]) => Promise<any>}
 
 export default function registerIPCCallbacks(ipcMain:IpcMain):void {
   const handlers:IPCHandler[] = [
@@ -9,6 +10,12 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
       channel: 'ashita:update',
       listener: async (_) => {
         updateAshita()
+      }
+    },
+    {
+      channel: 'magian:loadProfiles',
+      listener: async (_) => {
+        return loadProfiles()
       }
     }
   ]
