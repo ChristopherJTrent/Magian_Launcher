@@ -8,7 +8,8 @@ export type Channels = 'ipc-example';
 const electronHandler = {
   ipcRenderer: {
     updateAshita: () => ipcRenderer.invoke('ashita:update') as Promise<void>,
-    loadProfiles: () => ipcRenderer.invoke('magian:loadProfiles') as Promise<Profile[]>
+    loadProfiles: () => ipcRenderer.invoke('magian:loadProfiles') as Promise<Profile[]>,
+    getAddons: () => ipcRenderer.invoke('ashita:getAddons') as Promise<string[]>
   },
 }
 

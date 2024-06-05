@@ -1,8 +1,8 @@
 import { mkdir, readFile, readdir, writeFile } from "fs/promises"
-import { CONFIGURATION_LOCATION, MANAGED_SCRIPT_LOCATION, PROFILE_LOCATION } from "../Installation/paths"
+import { existsSync } from "fs"
+import { CONFIGURATION_LOCATION, PROFILE_LOCATION } from "../Installation/paths"
 import Profile from "../../data/Profile"
 import { AshitaSettings } from "../../store/AshitaSettingsReducer"
-import { existsSync } from "fs"
 import { dumpINI } from "../Config/INIHelper"
 
 export async function loadProfiles():Promise<Profile[]> {
@@ -30,5 +30,7 @@ export async function saveProfile(input:Profile, settings:AshitaSettings):Promis
       dumpINI(settings), 
       {flag: 'w+'}
     )
+  } catch(e) {
+    console.log(e)
   }
 }
