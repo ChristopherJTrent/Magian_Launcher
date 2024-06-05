@@ -9,15 +9,14 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path'
-import { app, BrowserWindow, shell, ipcMain, dialog, ipcRenderer } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
 import MenuBuilder from './menu'
 import { resolveHtmlPath } from './util'
 import { hasGit } from '../lib/util/Installation/paths'
-import { ashitaMessages } from '../lib/ipc'
-import updateAshita from '../lib/util/Installation/Ashita'
 import registerIPCCallbacks from './ipcHandlers'
+import updateAshita from '../lib/util/Installation/Ashita'
 
 class AppUpdater {
   constructor() {
@@ -30,6 +29,8 @@ class AppUpdater {
 let mainWindow: BrowserWindow | null = null
 
 registerIPCCallbacks(ipcMain)
+
+updateAshita()
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support')
