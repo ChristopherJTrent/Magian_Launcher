@@ -1,14 +1,19 @@
-import { Accordion } from "@chakra-ui/react"
-import React from "react"
-import Addon from "../../lib/data/Addon"
-import AddonElement from "./AddonElement"
+import { Accordion, AccordionButton, AccordionItem } from "@chakra-ui/react"
+import React, { useEffect } from "react"
+import { useAppDispatch, useAppSelector } from "../../lib/store/store"
+import { receiveAddons } from "../../lib/store/addonsReducer"
 
-export type AddonListingProps = {
-  addons: Addon[]
-}
-
-export default function AddonListing({addons}: AddonListingProps) {
-  return <Accordion allowToggle width='60%' reduceMotion>
-    {addons.map((v) => <AddonElement addon={v} key={v.Name as React.Key} />)}
-  </Accordion>
+export default function AddonListing() {
+  const addons = useAppSelector(state => state.addons)
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    window.electron.ipcRenderer.getAddons().then((v) => {
+      // console.log(v)
+      return dispatch(receiveAddons(v))
+    }).catch((_) => {})
+  }, [dispatch])
+  console.log(addons)
+  return <ul>
+    {addons && addons.map((v, i) => <li key={i}>{v}</li>)}
+  </ul>
 }
