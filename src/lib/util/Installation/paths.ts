@@ -7,6 +7,7 @@ export const PROFILE_LOCATION = `${INSTALL_LOCATION}\\Profiles`
 export const CONFIGURATION_LOCATION = `${ASHITA_LOCATION}\\config\\boot\\managed`
 export const SCRIPT_LOCATION = `${ASHITA_LOCATION}\\scripts`
 export const MANAGED_SCRIPT_LOCATION = `${SCRIPT_LOCATION}\\managed`
+export const ADDON_LOCATION = `${ASHITA_LOCATION}\\addons`
 
 export function hasGit():boolean {
   const bat = spawnSync('powershell.exe',[
