@@ -4,6 +4,7 @@ import AppLayout from "./Layouts/App"
 import SettingsEditor from "./Widgets/SettingsEditor"
 import GamepadEditor from "./Widgets/GamepadEditor"
 import { useEffect } from "react"
+import ProfileListing from "./Widgets/ProfileListing"
 
 export default function Launcher() {
   useEffect(() => {
@@ -20,8 +21,8 @@ export default function Launcher() {
       </TabList>
       <TabPanels>
         <TabPanel>
-          <Flex overflowY='scroll' flexDirection='column' height='40vh'>
-            {}
+          <Flex overflowY='auto' flexDirection='column' height='80vh'>
+            <ProfileListing />
           </Flex>
         </TabPanel>
         <TabPanel>
