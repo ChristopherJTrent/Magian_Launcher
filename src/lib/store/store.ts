@@ -4,13 +4,15 @@ import AshitaSettingsReducer from "./AshitaSettingsReducer"
 import GamepadSettings from "./GamepadSettings"
 import flagsReducer from "./flagsReducer"
 import addonsReducer from "./addonsReducer"
+import ProfileReducer from "./ProfileReducer"
 
 export const store = configureStore({
 	reducer: {
 		ashitaSettings: AshitaSettingsReducer,
     gamepad: GamepadSettings,
     flags: flagsReducer,
-    addons: addonsReducer
+    addons: addonsReducer,
+    profiles: ProfileReducer
 	}
 })
 
