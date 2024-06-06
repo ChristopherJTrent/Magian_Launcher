@@ -12,11 +12,15 @@ import path from 'path'
 import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
+import { existsSync } from 'fs'
 import MenuBuilder from './menu'
 import { resolveHtmlPath } from './util'
-import { hasGit } from '../lib/util/Installation/paths'
+import { PROFILE_LOCATION, hasGit } from '../lib/util/Installation/paths'
 import registerIPCCallbacks from './ipcHandlers'
 import updateAshita from '../lib/util/Installation/Ashita'
+import { initializeProfile, saveProfile } from '../lib/util/IO/ProfileLoader'
+import Profile from '../lib/data/Profile'
+import retail from '../lib/util/Config/DefaultConfiguration'
 
 class AppUpdater {
   constructor() {
@@ -31,6 +35,13 @@ let mainWindow: BrowserWindow | null = null
 registerIPCCallbacks(ipcMain)
 
 updateAshita()
+
+if(!existsSync(`${PROFILE_LOCATION}\\default`)) {
+  const defaultProfile = new Profile('default')
+  initializeProfile('default').then(() => {
+    return saveProfile(defaultProfile, retail(defaultProfile.name))
+  }).catch((e) => console.error(e))
+}
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support')
