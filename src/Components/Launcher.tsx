@@ -1,14 +1,14 @@
-import { Flex, Icon, Tab, TabList, TabPanel, TabPanels, Tabs, Tooltip } from "@chakra-ui/react"
-import AddonListing from "./Widgets/AddonListing"
-import AppLayout from "./Layouts/App"
-import SettingsEditor from "./Widgets/SettingsEditor"
-import GamepadEditor from "./Widgets/GamepadEditor"
+import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs, Tooltip } from "@chakra-ui/react"
 import { useEffect } from "react"
-import ProfileListing from "./Widgets/ProfileListing"
 import { RiProfileLine } from 'react-icons/ri'
 import { SiCplusplus, SiLua } from 'react-icons/si'
 import { SettingsIcon } from "@chakra-ui/icons"
 import {PiGameController} from 'react-icons/pi'
+import AddonListing from "./Widgets/AddonListing"
+import AppLayout from "./Layouts/App"
+import SettingsEditor from "./Widgets/SettingsEditor"
+import GamepadEditor from "./Widgets/GamepadEditor"
+import ProfileListing from "./Widgets/ProfileListing"
 
 export default function Launcher() {
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function Launcher() {
         <Tab>
           <Tooltip label='Addons'>
             <span>
-              <SiLua/>
+              <SiLua />
             </span>
           </Tooltip>
         </Tab>
