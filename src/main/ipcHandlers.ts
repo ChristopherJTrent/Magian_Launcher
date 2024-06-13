@@ -43,8 +43,8 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
     },
     {
       channel: 'ashita:saveScript',
-      listener: async (_, name, addons) => {
-        await saveScript(name, addons)
+      listener: async (_, profile) => {
+        await saveScript(profile)
       }
     },
     {
