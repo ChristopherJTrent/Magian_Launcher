@@ -1,4 +1,4 @@
-export function generateManagedScript(name:string, addons:string[] | undefined):string {
+export function generateManagedScript(name:string, addons:string[], plugins: string[]):string {
   return `
 ;---------------------------------------------------------------------------;
 ; This script is managed by Magian Launcher. It will be overwritten         ;
@@ -6,8 +6,7 @@ export function generateManagedScript(name:string, addons:string[] | undefined):
 ; Please edit the profile hook scripts provided in scripts/${name}.         ;
 ;---------------------------------------------------------------------------;
 /exec ${name}/beforePluginLoad
-/load thirdparty
-/load screenshot
+${plugins.map((v) => `/load ${v}`).join('\n')}
 
 /exec ${name}/beforeAddonLoad
 ${addons?.map((v) => `/addon load ${v}`)?.join('\n') ?? '\n'}
