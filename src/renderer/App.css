@@ -72,9 +72,13 @@ a:hover {
     transform: none;
   }
 }
+.chakra-tabs__tablist {
+  background-color: #313541;
+  border-right: 1px solid rgb(64, 64, 68) !important;
+}
 
 .titlebar {
-  background-color: #D35547;
+  background-color: #282C37;
   -webkit-user-select: none;
   -webkit-app-region: drag;
   margin-bottom: 5px;

@@ -97,7 +97,7 @@ const createWindow = async () => {
     },
     titleBarStyle: 'hidden',
     titleBarOverlay: {
-      color: '#D35547',
+      color: '#282C37',
       symbolColor: '#fff',
       height: 30,
     }
