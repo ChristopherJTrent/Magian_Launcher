@@ -10,6 +10,7 @@ const electronHandler = {
     updateAshita: () => ipcRenderer.invoke('ashita:update') as Promise<void>,
     loadProfiles: () => ipcRenderer.invoke('magian:loadProfiles') as Promise<Profile[]>,
     getAddons: () => ipcRenderer.invoke('ashita:getAddons') as Promise<string[]>,
+    getPlugins: () => ipcRenderer.invoke('ashita:getPlugins') as Promise<string[]>,
     saveScript: (name:string, addons:string[]) => ipcRenderer.invoke('ashita:saveScript', name, addons)
   },
 }

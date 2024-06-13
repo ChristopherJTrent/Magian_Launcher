@@ -1,11 +1,11 @@
 import { IpcMain, IpcMainInvokeEvent } from "electron"
 import updateAshita from "../lib/util/Installation/Ashita"
 import { loadProfiles, saveProfile } from "../lib/util/IO/ProfileLoader"
-import getAddonList from "../lib/util/Installation/Addons"
+import {getAddonList, getPluginList} from "../lib/util/Installation/Extensions"
 import Profile from "../lib/data/Profile"
 import { AshitaSettings } from "../lib/store/AshitaSettingsReducer"
 import spawnAshita from "../lib/util/helpers/spawnAshita"
-import saveScript from "../lib/util/IO/AddonLoader"
+import saveScript from "../lib/util/IO/ScriptLoader"
 
 type IPCHandler = {channel: string, listener: (event:IpcMainInvokeEvent, ...args: any[]) => Promise<any>}
 
@@ -36,9 +36,14 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
       }
     },
     {
+      channel: 'ashita:getPlugins',
+      listener: async (_) => {
+        return getPluginList()
+      }
+    },
+    {
       channel: 'ashita:saveScript',
       listener: async (_, name, addons) => {
-        console.log('saving addons')
         await saveScript(name, addons)
       }
     },
