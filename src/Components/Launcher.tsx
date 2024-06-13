@@ -19,7 +19,7 @@ export default function Launcher() {
     <Tabs width='100%' height='calc(100vh - 30px)' orientation="vertical"
     sx={{
       '.chakra-tabs__tablist': {
-        border: 'none',
+        borderLeft: 'none',
       },
       '.chakra-tabs__tab[aria-selected=true]': {
         backgroundColor: '#D35547',
@@ -27,6 +27,10 @@ export default function Launcher() {
       },
       'chakra-tabs__tab[aria-selected=false]': {
         backgroundColor: '#313541'
+      },
+      '.chakra-tabs__tab:hover': {
+        backgroundColor: '#D35547',
+        color: 'white'
       }
     }}>
       <TabList>
