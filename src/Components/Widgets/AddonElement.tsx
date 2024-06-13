@@ -2,6 +2,7 @@ import { useSelector } from "react-redux"
 import { Flex, Switch } from "@chakra-ui/react"
 import { addonEnabled, setAddonDisabled, setAddonEnabled } from "../../lib/store/ProfileReducer"
 import { useAppDispatch } from "../../lib/store/store"
+import { changeScript } from "../../lib/store/flagsReducer"
 
 export type AddonElementProps = {
   addon: string
@@ -28,6 +29,7 @@ export default function AddonElement({addon}:AddonElementProps) {
   const dispatch = useAppDispatch()
 
   const toggleAddon = () => {
+    dispatch(changeScript())
     if (enabled) {
       dispatch(setAddonDisabled(addon))
     } else {
