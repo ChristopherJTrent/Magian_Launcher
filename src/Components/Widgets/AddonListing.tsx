@@ -18,7 +18,7 @@ export default function AddonListing() {
         direction='column' 
         overflowY='scroll' 
         paddingRight='5px'
-        height='80vh'>
+        height='calc(90vh - 30px)'>
       <ul>
         {addons && addons.map((v) => <AddonElement key={v} addon={v}/>)}
       </ul>
