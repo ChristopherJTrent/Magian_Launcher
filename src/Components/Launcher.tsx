@@ -9,6 +9,7 @@ import AppLayout from "./Layouts/App"
 import SettingsEditor from "./Widgets/SettingsEditor"
 import GamepadEditor from "./Widgets/GamepadEditor"
 import ProfileListing from "./Widgets/ProfileListing"
+import PluginListing from "./Widgets/PluginListing"
 
 export default function Launcher() {
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function Launcher() {
           </Flex>
         </TabPanel>
         <TabPanel>
-          <span>Plugins: Coming Soon!</span>
+          <PluginListing />
         </TabPanel>
         <TabPanel>
           <AddonListing/>
@@ -74,6 +75,9 @@ export default function Launcher() {
         </TabPanel>
       </TabPanels>
     </Tabs>
+    <Flex>
+      
+    </Flex>
   </AppLayout>
   )
 }
