@@ -5,6 +5,7 @@ import GamepadSettings from "./GamepadSettings"
 import flagsReducer from "./flagsReducer"
 import addonsReducer from "./addonsReducer"
 import ProfileReducer from "./ProfileReducer"
+import pluginsReducer from "./pluginsReducer"
 
 export const store = configureStore({
 	reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     gamepad: GamepadSettings,
     flags: flagsReducer,
     addons: addonsReducer,
+    plugins: pluginsReducer,
     profiles: ProfileReducer
 	}
 })
