@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../lib/store/store"
 import { receiveProfiles } from "../../lib/store/ProfileReducer"
+import ProfileElement from "./ProfileElement"
 
 
 export default function ProfileListing() {
@@ -14,7 +15,7 @@ export default function ProfileListing() {
   }, [dispatch])
   return <ul>
     {Object.keys(profiles).map((v) => <li key={v}>
-      {profiles[v].name}
+      <ProfileElement profileName={v} />
       </li>)}
   </ul>
 }
