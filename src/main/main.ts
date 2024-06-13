@@ -19,8 +19,8 @@ import { PROFILE_LOCATION, hasGit } from '../lib/util/Installation/paths'
 import registerIPCCallbacks from './ipcHandlers'
 import updateAshita from '../lib/util/Installation/Ashita'
 import { initializeProfile, saveProfile } from '../lib/util/IO/ProfileLoader'
-import Profile from '../lib/data/Profile'
 import retail from '../lib/util/Config/DefaultConfiguration'
+import { initialProfiles } from '../lib/data/DefaultProfile'
 
 class AppUpdater {
   constructor() {
@@ -37,7 +37,7 @@ registerIPCCallbacks(ipcMain)
 updateAshita()
 
 if(!existsSync(`${PROFILE_LOCATION}\\default`)) {
-  const defaultProfile = new Profile('default')
+  const defaultProfile = initialProfiles.list.default
   initializeProfile('default').then(() => {
     return saveProfile(defaultProfile, retail(defaultProfile.name))
   }).catch((e) => console.error(e))

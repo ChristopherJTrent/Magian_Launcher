@@ -32,7 +32,7 @@ export async function saveProfile(input:Profile, settings:AshitaSettings):Promis
     )
     await writeFile(
       `${MANAGED_SCRIPT_LOCATION}\\${input.name}.txt`,
-      generateManagedScript(input.name, input.enabledAddons),
+      generateManagedScript(input.name, input.enabledAddons, input.enabledPlugins),
       {flag: 'w+'}
     )
   } catch(e) { /* empty */ }
