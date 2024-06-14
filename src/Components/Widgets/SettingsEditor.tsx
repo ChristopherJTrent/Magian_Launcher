@@ -16,7 +16,11 @@ export default function SettingsEditor() {
           <Switch
             isChecked={advanced}
             onChange={() => setAdvanced(! advanced)} 
-            colorScheme="orange"/>
+            sx={{
+              '.chakra-switch__track[data-checked]': {
+                backgroundColor: '#D35547'
+              }
+            }}/>
           {
             Object.entries(settings).map(([k, v]) => (
               <div key={k}>

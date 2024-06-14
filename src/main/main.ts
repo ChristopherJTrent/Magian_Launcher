@@ -21,6 +21,7 @@ import updateAshita from '../lib/util/Installation/Ashita'
 import { initializeProfile, saveProfile } from '../lib/util/IO/ProfileLoader'
 import retail from '../lib/util/Config/DefaultConfiguration'
 import { initialProfiles } from '../lib/data/DefaultProfile'
+import {getAddonData} from '../lib/util/helpers/getExtensionData'
 
 class AppUpdater {
   constructor() {
@@ -29,6 +30,8 @@ class AppUpdater {
     autoUpdater.checkForUpdatesAndNotify()
   }
 }
+
+getAddonData('affinity')
 
 let mainWindow: BrowserWindow | null = null
 
@@ -94,7 +97,7 @@ const createWindow = async () => {
     },
     titleBarStyle: 'hidden',
     titleBarOverlay: {
-      color: '#fa8423',
+      color: '#D35547',
       symbolColor: '#fff',
       height: 30,
     }

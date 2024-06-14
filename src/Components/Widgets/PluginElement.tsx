@@ -26,6 +26,11 @@ export default function PluginElement({plugin}:PluginElementProps) {
       <Switch
         isChecked={enabled}
         onChange={togglePlugin}
+        sx={{
+          '.chakra-switch__track[data-checked]': {
+            backgroundColor: '#D35547'
+          }
+        }}
       />
     </Flex>
   </li>

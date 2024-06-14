@@ -42,6 +42,11 @@ export default function AddonElement({addon}:AddonElementProps) {
       <Switch
         isChecked={enabled}
         onChange={toggleAddon}
+        sx={{
+          '.chakra-switch__track[data-checked]': {
+            backgroundColor: '#D35547'
+          }
+        }}
       />
     </Flex>
   </li>
