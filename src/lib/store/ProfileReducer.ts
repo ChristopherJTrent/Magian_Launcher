@@ -6,7 +6,6 @@ import { initialProfiles, profilesMapping } from "../data/DefaultProfile"
 export const addonEnabled = (name:string) => 
   createSelector((state:RootState) => state.profiles,
     profiles => {
-      console.log(profiles.list[profiles.currentProfile])
       return profiles.list[profiles.currentProfile].enabledAddons?.includes(name) ?? false
     }
 )
@@ -26,7 +25,6 @@ export const profileSlice = createSlice({
       action.payload.forEach((v) => {
         state.list[v.name] = {name:v.name, enabledAddons:v.enabledAddons, enabledPlugins:v.enabledPlugins ?? []}
       })
-      console.log(state.list)
     },
     receiveProfile: (state:profilesMapping, action: PayloadAction<Profile>) => {
       state.list[action.payload.name] = action.payload
