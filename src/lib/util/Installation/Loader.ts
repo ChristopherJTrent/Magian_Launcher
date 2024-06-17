@@ -1,5 +1,7 @@
+import Addon from "../../data/Addon"
 import { receiveProfiles } from "../../store/ProfileReducer"
-import { receiveAddons } from "../../store/addonsReducer"
+import { receiveAddon } from "../../store/addonsReducer"
+import { LoaderHook, receiveHook, receiveHooks } from "../../store/loaderReducer"
 import { receiveplugins } from "../../store/pluginsReducer"
 import { AppDispatch } from "../../store/store"
 /**
@@ -7,15 +9,38 @@ import { AppDispatch } from "../../store/store"
  */
 export default async function handleApplicationLoad(dispatch: AppDispatch) {
   const ipc = window.electron.ipcRenderer
-  const tasks:(()=>Promise<void>)[] = [
-    async () => {ipc.ensureGit()},
-    async () => {ipc.updateAshita()},
-    async () => {dispatch(receiveProfiles(await ipc.loadProfiles()))},
-    async () => {dispatch(receiveAddons(await ipc.getAddons()))},
-    async () => {dispatch(receiveplugins(await ipc.getPlugins()))}
+  const tasks:LoaderHook[] = [
+    {
+      name: 'Ensure Git',
+      func: async () => {ipc.ensureGit()},
+    },
+    {
+      name: 'Update Ashita',
+      func: async () => {ipc.updateAshita()},
+    },
+    {
+      name: 'Load Profiles',
+      func: async () => {dispatch(receiveProfiles(await ipc.loadProfiles()))},
+    },
+    {
+      name: 'Load Addons',
+      func:async () => {
+        const addons = await ipc.getAddons()
+        addons.forEach(addon => {
+          dispatch(receiveHook({
+            name: `Get Addon Data: ${addon}`,
+            func: async () => {
+              const addonData = await ipc.getAddonData(addon)
+              dispatch(receiveAddon(new Addon(addon, addonData.author, addonData.version, addonData.desc, addonData.link)))
+            }
+          }))
+        })
+      }
+    },
+    {
+      name: 'Load Plugins',
+      func: async () => {dispatch(receiveplugins(await ipc.getPlugins()))}
+    }
   ]
-  await ipc.updateAshita()
-  dispatch(receiveProfiles(await ipc.loadProfiles()))
-  dispatch(receiveAddons(await ipc.getAddons()))
-
+  dispatch(receiveHooks(tasks))
 }
