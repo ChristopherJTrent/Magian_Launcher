@@ -17,7 +17,8 @@ const electronHandler = {
       ipcRenderer.invoke('magian:saveProfile', profile, settings),
     launchAshita: (profileName:string) => {
       ipcRenderer.invoke('magian:startAshita', profileName)
-    }
+    },
+    ensureGit: () => ipcRenderer.invoke('magian:ensureGit') as Promise<void>
   },
 }
 
