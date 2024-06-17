@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux"
-import { Flex, Switch } from "@chakra-ui/react"
+import { Flex, Link, Switch, Text } from "@chakra-ui/react"
 import { addonEnabled, setAddonDisabled, setAddonEnabled } from "../../lib/store/ProfileReducer"
 import { useAppDispatch } from "../../lib/store/store"
 import { changeScript } from "../../lib/store/flagsReducer"
+import Addon from "../../lib/data/Addon"
 
 export type AddonElementProps = {
-  addon: string
+  addon: Addon
 }
 
 export default function AddonElement({addon}:AddonElementProps) {
@@ -25,20 +26,25 @@ export default function AddonElement({addon}:AddonElementProps) {
   //    <Text fontSize='lg' overflowWrap='break-word'>{addon.Description}</Text>
   //  </AccordionPanel>
   // </AccordionItem>
-  const enabled = useSelector(addonEnabled(addon))
+  const enabled = useSelector(addonEnabled(addon.name))
   const dispatch = useAppDispatch()
 
   const toggleAddon = () => {
     dispatch(changeScript())
     if (enabled) {
-      dispatch(setAddonDisabled(addon))
+      dispatch(setAddonDisabled(addon.name))
     } else {
-      dispatch(setAddonEnabled(addon))
+      dispatch(setAddonEnabled(addon.name))
     }
   }
   return <li>
     <Flex justifyContent='space-between' direction='row'>
-      <h2>{addon}</h2>
+      <Flex direction='column'>
+        <h2>{addon.name}</h2>
+        <Text>
+          {addon.desc}
+        </Text>
+      </Flex>
       <Switch
         isChecked={enabled}
         onChange={toggleAddon}
@@ -48,6 +54,10 @@ export default function AddonElement({addon}:AddonElementProps) {
           }
         }}
       />
+    </Flex>
+    <Flex direction='row' justifyContent='space-between'>
+      {addon.author}
+      <Link href={addon.link}>{addon.link}</Link>
     </Flex>
   </li>
 }

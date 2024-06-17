@@ -20,7 +20,7 @@ export default function AddonListing() {
         paddingRight='5px'
         height='calc(90vh - 30px)'>
       <ul>
-        {addons && addons.map((v) => <AddonElement key={v} addon={v}/>)}
+        {addons && addons.map((v) => <AddonElement key={v.name} addon={v}/>)}
       </ul>
     </Flex>
     <AddonSaveButton />
