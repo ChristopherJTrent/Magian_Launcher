@@ -1,13 +1,17 @@
 import Addon from "../../data/Addon"
 import { receiveProfiles } from "../../store/ProfileReducer"
-import { receiveAddon } from "../../store/addonsReducer"
+import { receiveAddon, receiveAddons } from "../../store/addonsReducer"
 import { LoaderHook, receiveHook, receiveHooks } from "../../store/loaderReducer"
 import { receiveplugins } from "../../store/pluginsReducer"
-import { AppDispatch } from "../../store/store"
+import { AppDispatch, store } from "../../store/store"
 /**
  * Frontend
  */
 export default async function handleApplicationLoad(dispatch: AppDispatch) {
+  dispatch(receiveAddons([]))
+  if(store.getState().flags.loadSucceeded) {
+    return
+  }
   const ipc = window.electron.ipcRenderer
   const tasks:LoaderHook[] = [
     {
@@ -40,7 +44,7 @@ export default async function handleApplicationLoad(dispatch: AppDispatch) {
     {
       name: 'Load Plugins',
       func: async () => {dispatch(receiveplugins(await ipc.getPlugins()))}
-    }
+    },
   ]
   dispatch(receiveHooks(tasks))
 }
