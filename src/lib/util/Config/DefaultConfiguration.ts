@@ -12,7 +12,7 @@ const retail = (name:string) => ({
       file: '',
       command: '/game eAZcFcB',
       gamemodule: 'ffximain.dll',
-      script: `${name}.txt`,
+      script: `managed/${name}.txt`,
       args: ''
     },
     language: {

@@ -3,7 +3,7 @@ import retail from "../util/Config/DefaultConfiguration"
 
 export type AshitaSettings = ReturnType<typeof retail>
 
-const initialState:AshitaSettings = retail('Managed_Retail')
+const initialState:AshitaSettings = retail('default')
 
 export type setvalArgs = {
   k0:string
