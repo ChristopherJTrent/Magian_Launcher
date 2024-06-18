@@ -6,6 +6,8 @@ import Profile from "../lib/data/Profile"
 import { AshitaSettings } from "../lib/store/AshitaSettingsReducer"
 import spawnAshita from "../lib/util/helpers/spawnAshita"
 import saveScript from "../lib/util/IO/ScriptLoader"
+import { ensureGit } from "../lib/util/Installation/paths"
+import { getAddonData } from "../lib/util/helpers/getExtensionData"
 
 type IPCHandler = {channel: string, listener: (event:IpcMainInvokeEvent, ...args: any[]) => Promise<any>}
 
@@ -36,6 +38,12 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
       }
     },
     {
+      channel: 'ashita:getAddonData',
+      listener: async (_, name) => {
+        return getAddonData(name)
+      }
+    },
+    {
       channel: 'ashita:getPlugins',
       listener: async (_) => {
         return getPluginList()
@@ -51,6 +59,12 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
       channel: 'magian:startAshita',
       listener: async (_, name:string) => {
         spawnAshita(name)
+      }
+    },
+    {
+      channel: 'magian:ensureGit',
+      listener: async (_) => {
+        ensureGit()
       }
     }
   ]

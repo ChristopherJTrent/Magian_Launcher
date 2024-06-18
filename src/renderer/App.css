@@ -83,3 +83,15 @@ a:hover {
   -webkit-app-region: drag;
   margin-bottom: 5px;
 }
+
+* {
+  &::-webkit-scrollbar {
+    background-color: rgba(0,0,0,0);
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color:#D35547;
+    margin-left: 4px;
+    border-radius: 4px;
+  }
+}
