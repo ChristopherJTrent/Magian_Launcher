@@ -122,7 +122,7 @@ export default function Launcher() {
         </TabPanel>
       </TabPanels>
     </Tabs> || <Flex justify='center' align='center' width='100%' height='calc(100vh - 30px)'>
-      <h1>Running Load Hook: {loader.currentHook}</h1>
+      <h1>Running Hook: {loader.currentHook}</h1>
     </Flex>
     }
   </AppLayout>
