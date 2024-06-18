@@ -178,7 +178,7 @@ export default function GamepadEditor() {
         ))
       }
     </Flex>
-    <Flex direction='column' alignContent='center' overflowY='scroll' height='67vh'>
+    <Flex direction='column' alignContent='center' overflowY='scroll' height='67vh' paddingRight='5px'>
       <h1 style={{fontSize: '1.4em'}}>Controller Bindings</h1>
       <hr/>
       {
