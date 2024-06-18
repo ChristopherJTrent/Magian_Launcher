@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { Flex, Link, Switch, Text } from "@chakra-ui/react"
+import { Divider, Flex, ListItem, Switch, Text } from "@chakra-ui/react"
 import { addonEnabled, setAddonDisabled, setAddonEnabled } from "../../lib/store/ProfileReducer"
 import { useAppDispatch } from "../../lib/store/store"
 import { changeScript } from "../../lib/store/flagsReducer"
@@ -37,13 +37,28 @@ export default function AddonElement({addon}:AddonElementProps) {
       dispatch(setAddonEnabled(addon.name))
     }
   }
-  return <li>
-    <Flex justifyContent='space-between' direction='row'>
+  return <ListItem 
+      border='2px solid rgba(0,0,0,0.2)'
+      padding='0.75em'>
+    <Flex 
+      justifyContent='space-between' 
+      direction='row'>
       <Flex direction='column'>
-        <h2>{addon.name}</h2>
-        <Text>
-          {addon.desc}
-        </Text>
+        <Text fontSize='large' fontWeight='700'>{addon.name}</Text>
+        <Flex direction='row' alignItems='center'>
+          <Divider 
+            borderColor='#D35547' 
+            backgroundColor='#D35547'
+            orientation="vertical" 
+            width='1px'
+            borderWidth='1px'
+            marginTop='5px'
+            marginBottom='5px'
+            marginRight='5px'/>
+          <Text fontSize='9pt' marginTop='auto' marginBottom='auto'>
+            {addon.desc}
+          </Text>
+        </Flex>
       </Flex>
       <Switch
         isChecked={enabled}
@@ -56,8 +71,10 @@ export default function AddonElement({addon}:AddonElementProps) {
       />
     </Flex>
     <Flex direction='row' justifyContent='space-between'>
-      {addon.author}
-      <Link href={addon.link}>{addon.link}</Link>
+      <Text >
+        {addon.author}
+      </Text>
+      {addon.link}
     </Flex>
-  </li>
+  </ListItem>
 }

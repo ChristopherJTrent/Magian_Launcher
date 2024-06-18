@@ -14,7 +14,9 @@ export const addonsSlice = createSlice({
       action.payload.forEach((v, i) => {state[i] = v})
     },
     receiveAddon: (state: addonsMapping, action:PayloadAction<Addon>) => {
-      state.push(action.payload)
+      if(!state.find((value) => value.name === action.payload.name)) {
+        state.push(action.payload)
+      }
     }
   }
 })

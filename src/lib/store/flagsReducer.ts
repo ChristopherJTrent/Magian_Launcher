@@ -23,11 +23,12 @@ export const flagsSettingsSlice = createSlice({
     changeSettings: (state) => {state.settingsChanged = true},
     changeScript: (state) => {state.scriptChanged = true},
     loadSucceed: (state) => {state.loadSucceeded = true},
+    resetLoad: (state) => {state.loadSucceeded = false},
     ashitaFound: (state) => {state.ashitaInstalled = true},
     setRemainingHooks: (state, action:PayloadAction<number>) => {state.remainingHooks = action.payload}
   }
 })
 
-export const {changeSettings, changeScript, loadSucceed, ashitaFound, setRemainingHooks} = flagsSettingsSlice.actions
+export const {changeSettings, changeScript, loadSucceed, resetLoad, ashitaFound, setRemainingHooks} = flagsSettingsSlice.actions
 
 export default flagsSettingsSlice.reducer
