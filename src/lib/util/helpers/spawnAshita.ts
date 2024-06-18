@@ -1,5 +1,5 @@
-import { ASHITA_LOCATION } from '../Installation/paths'
 import { spawnSync } from 'child_process'
+import { ASHITA_LOCATION } from '../Installation/paths'
 
 export default async function spawnAshita(scriptName:string) {
   console.log(scriptName)
@@ -15,7 +15,7 @@ export default async function spawnAshita(scriptName:string) {
       `managed/${scriptName}.ini`,
       '-Verb',
       'RunAs'
-    ],
+    ], // Start-Process -FilePath C:\Users\Chris\Magian Launcher\Ashita\Ashita-cli.exe -WorkingDirectory C:\Users\Chris\Magian Launcher\Ashita -Args managed/default.ini -Verb RunAs
     {
       shell: 'powershell.exe',
       windowsHide: false
