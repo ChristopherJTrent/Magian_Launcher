@@ -9,15 +9,14 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path'
-import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
+import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
 import { existsSync } from 'fs'
 import MenuBuilder from './menu'
 import { resolveHtmlPath } from './util'
-import { PROFILE_LOCATION, hasGit } from '../lib/util/Installation/paths'
+import { PROFILE_LOCATION } from '../lib/util/Installation/paths'
 import registerIPCCallbacks from './ipcHandlers'
-import updateAshita from '../lib/util/Installation/Ashita'
 import { initializeProfile, saveProfile } from '../lib/util/IO/ProfileLoader'
 import retail from '../lib/util/Config/DefaultConfiguration'
 import { initialProfiles } from '../lib/data/DefaultProfile'
@@ -33,8 +32,6 @@ class AppUpdater {
 let mainWindow: BrowserWindow | null = null
 
 registerIPCCallbacks(ipcMain)
-
-updateAshita()
 
 if(!existsSync(`${PROFILE_LOCATION}\\default`)) {
   const defaultProfile = initialProfiles.list.default
@@ -100,10 +97,6 @@ const createWindow = async () => {
     }
   })
 
-  if (!hasGit()) {
-    dialog.showErrorBox('Fatal: Git is required.', 'Git is required for Magian Launcher to run. Please install "Git for Windows" and try again.')
-    mainWindow?.close()
-  }
   mainWindow.loadURL(resolveHtmlPath('index.html'))
 
   mainWindow.on('ready-to-show', () => {
