@@ -38,6 +38,7 @@ export default function AddonElement({addon}:AddonElementProps) {
     }
   }
   return <ListItem 
+      marginTop='4px'
       border='2px solid rgba(0,0,0,0.2)'
       padding='0.75em'>
     <Flex 
