@@ -6,6 +6,7 @@ import flagsReducer from "./flagsReducer"
 import addonsReducer from "./addonsReducer"
 import ProfileReducer from "./ProfileReducer"
 import pluginsReducer from "./pluginsReducer"
+import loaderReducer from "./loaderReducer"
 
 export const store = configureStore({
 	reducer: {
@@ -14,8 +15,12 @@ export const store = configureStore({
     flags: flagsReducer,
     addons: addonsReducer,
     plugins: pluginsReducer,
-    profiles: ProfileReducer
-	}
+    profiles: ProfileReducer,
+    loader: loaderReducer
+	},
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false
+  })
 })
 
 export type RootState = ReturnType<typeof store.getState>
