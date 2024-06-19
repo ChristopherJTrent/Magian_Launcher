@@ -21,7 +21,7 @@ export default class AshitaSettings {
 
   bootArgs:string = ''
 
-  languagePoL:number = 2
+  language:number = 2
 
   loggingLevel:number = 3
 
@@ -126,4 +126,9 @@ export default class AshitaSettings {
   xInput:settingsBoolean = 'useRegistry'
 
   padBinding:string = '-1'
+
+  constructor(profileName:string) {
+    this.profileName = profileName
+    this.bootScript = `managed/${profileName}`
+  }
 }
