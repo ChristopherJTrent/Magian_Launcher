@@ -2,6 +2,7 @@ import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit"
 import Profile from "../data/Profile"
 import { type RootState } from "./store"
 import { initialProfiles, profilesMapping } from "../data/DefaultProfile"
+import AshitaSettings from "../data/AshitaSettings"
 
 export const addonEnabled = (name:string) => 
   createSelector((state:RootState) => state.profiles,
@@ -16,6 +17,10 @@ export const pluginEnabled = (name:string) =>
       profiles.list[profiles.currentProfile].enabledPlugins?.includes(name) ?? true
 )
 
+export const currentProfile = createSelector((state:RootState) => state.profiles,
+  profiles => profiles.list[profiles.currentProfile]
+)
+
 export const profileSlice = createSlice({
   name: 'profiles',
   initialState:initialProfiles,
@@ -23,7 +28,7 @@ export const profileSlice = createSlice({
     receiveProfiles: (state: profilesMapping, action: PayloadAction<Profile[]>) => {
       state.list = {}
       action.payload.forEach((v) => {
-        state.list[v.name] = {name:v.name, enabledAddons:v.enabledAddons, enabledPlugins:v.enabledPlugins ?? []}
+        state.list[v.name] = v
       })
     },
     receiveProfile: (state:profilesMapping, action: PayloadAction<Profile>) => {
@@ -52,6 +57,12 @@ export const profileSlice = createSlice({
     setPluginDisabled: (state:profilesMapping, action:PayloadAction<string>) => {
       state.list[state.currentProfile].enabledPlugins = 
         state.list[state.currentProfile].enabledPlugins.filter(plugin => plugin !== action.payload)
+    },
+    setSettingsValue: (state:profilesMapping, action:PayloadAction<{field:string, value: any}>) => {
+      // @ts-ignore
+      state.list[state.currentProfile]
+        .settings[action.payload.field as keyof AshitaSettings]
+        = action.payload.value
     }
   }
 })
