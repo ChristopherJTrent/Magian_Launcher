@@ -2,13 +2,13 @@ import { Accordion, AccordionButton, AccordionIcon, AccordionItem, Box, Switch }
 import { useState } from "react"
 import SettingsRow from "./SettingsRow"
 import { RootState, useAppSelector } from "../../lib/store/store"
-import { AshitaSettings } from "../../lib/store/AshitaSettingsReducer"
+import { AshitaSettings_old } from "../../lib/store/AshitaSettingsReducer"
 
 
 
 export default function SettingsEditor() {
   const advancedRows = ['taskpool','logging', 'resources', 'direct3d8', 'registry']
-	const settings = useAppSelector((state:RootState):AshitaSettings => state.ashitaSettings)
+	const settings = useAppSelector((state:RootState):AshitaSettings_old => state.ashitaSettings)
 	const [advanced, setAdvanced] = useState(false)
   return (
       <Box scrollBehavior='smooth' overflowY='scroll' height='80vh'>

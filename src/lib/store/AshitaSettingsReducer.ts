@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import retail from "../util/Config/DefaultConfiguration"
 
-export type AshitaSettings = ReturnType<typeof retail>
+export type AshitaSettings_old = ReturnType<typeof retail>
 
-const initialState:AshitaSettings = retail('default')
+const initialState:AshitaSettings_old = retail('default')
 
 export type setvalArgs = {
   k0:string
@@ -16,11 +16,11 @@ export const AshitaSettingsSlice = createSlice({
   name: 'ashitaSettings',
   initialState,
   reducers: {
-    receiveSettings: (state:AshitaSettings, action:PayloadAction<AshitaSettings>) => {
+    receiveSettings: (state:AshitaSettings_old, action:PayloadAction<AshitaSettings_old>) => {
       // eslint-disable-next-line no-param-reassign
       state = action.payload
     },
-    setValue: (state:AshitaSettings, action:PayloadAction<setvalArgs>) => {
+    setValue: (state:AshitaSettings_old, action:PayloadAction<setvalArgs>) => {
 		const v = state
 		const v1 = v[action.payload.k0 as keyof typeof state]
 		// known any, the code works, don't mess with it.

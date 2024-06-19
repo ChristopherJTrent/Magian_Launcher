@@ -2,7 +2,7 @@
 /* eslint no-unused-vars: off */
 import { contextBridge, ipcRenderer} from 'electron'
 import Profile from '../lib/data/Profile'
-import { AshitaSettings } from '../lib/store/AshitaSettingsReducer'
+import { AshitaSettings_old } from '../lib/store/AshitaSettingsReducer'
 import { AddonData } from '../lib/util/helpers/getExtensionData'
 
 export type Channels = 'ipc-example';
@@ -14,7 +14,7 @@ const electronHandler = {
     getAddons: () => ipcRenderer.invoke('ashita:getAddons') as Promise<string[]>,
     getPlugins: () => ipcRenderer.invoke('ashita:getPlugins') as Promise<string[]>,
     saveScript: (profile:Profile) => ipcRenderer.invoke('ashita:saveScript', profile),
-    saveProfile: (profile:Profile, settings:AshitaSettings) => 
+    saveProfile: (profile:Profile, settings:AshitaSettings_old) => 
       ipcRenderer.invoke('magian:saveProfile', profile, settings),
     launchAshita: (profileName:string) => {
       ipcRenderer.invoke('magian:startAshita', profileName)

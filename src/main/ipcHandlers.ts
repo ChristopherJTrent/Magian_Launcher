@@ -3,7 +3,7 @@ import updateAshita from "../lib/util/Installation/Ashita"
 import { loadProfiles, saveProfile } from "../lib/util/IO/ProfileLoader"
 import {getAddonList, getPluginList} from "../lib/util/Installation/Extensions"
 import Profile from "../lib/data/Profile"
-import { AshitaSettings } from "../lib/store/AshitaSettingsReducer"
+import { AshitaSettings_old } from "../lib/store/AshitaSettingsReducer"
 import spawnAshita from "../lib/util/helpers/spawnAshita"
 import saveScript from "../lib/util/IO/ScriptLoader"
 import { ensureGit } from "../lib/util/Installation/paths"
@@ -27,7 +27,7 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
     },
     {
       channel: 'magian:saveProfile',
-      listener: async (_, profile:Profile, settings:AshitaSettings) => {
+      listener: async (_, profile:Profile, settings:AshitaSettings_old) => {
         await saveProfile(profile, settings)
       }
     },
