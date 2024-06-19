@@ -1,6 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import retail from "../util/Config/DefaultConfiguration"
 
+// TODO: Remove this whole thing.
+
 export type AshitaSettings_old = ReturnType<typeof retail>
 
 const initialState:AshitaSettings_old = retail('default')

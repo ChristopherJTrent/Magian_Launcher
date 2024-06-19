@@ -14,7 +14,7 @@ export async function loadProfiles():Promise<Profile[]> {
     .map(async path => JSON.parse((await readFile(path)).toString()) as Profile)
   )
 }
-
+// TODO: Refactor this to use the settings inside the profile
 export async function saveProfile(input:Profile, settings:AshitaSettings_old):Promise<void> {
   const PROFILE_DIR = `${PROFILE_LOCATION}\\${input.name}`
   if (!existsSync(PROFILE_DIR)) {
