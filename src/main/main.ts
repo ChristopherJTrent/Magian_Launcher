@@ -12,14 +12,9 @@ import path from 'path'
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
-import { existsSync } from 'fs'
 import MenuBuilder from './menu'
 import { resolveHtmlPath } from './util'
-import { PROFILE_LOCATION } from '../lib/util/Installation/paths'
 import registerIPCCallbacks from './ipcHandlers'
-import { initializeProfile, saveProfile } from '../lib/util/IO/ProfileLoader'
-import retail from '../lib/util/Config/DefaultConfiguration'
-import { initialProfiles } from '../lib/data/DefaultProfile'
 
 class AppUpdater {
   constructor() {
