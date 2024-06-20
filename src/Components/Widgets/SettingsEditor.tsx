@@ -1,4 +1,4 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Flex, Switch } from "@chakra-ui/react"
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Flex, Switch, Text } from "@chakra-ui/react"
 import { useState } from "react"
 import SettingsRow from "./SettingsRow"
 import { RootState, useAppSelector } from "../../lib/store/store"
@@ -6,6 +6,7 @@ import { AshitaSettings_old } from "../../lib/store/AshitaSettingsReducer"
 import AshitaSettings from "../../lib/data/AshitaSettings"
 import { currentProfile } from "../../lib/store/ProfileReducer"
 import AccordButton from "./AccordButton"
+import BootConfig from "./configModules/BootConfig"
 
 // TODO: Refactor this module to use the profile settings\
 
@@ -16,14 +17,7 @@ export default function SettingsEditor() {
   return (
       <Box scrollBehavior='smooth' overflowY='scroll' height='80vh'>
         <Accordion allowMultiple>
-          <AccordionItem>
-            <AccordButton>
-              launcher
-            </AccordButton>
-            <AccordionPanel>
-              
-            </AccordionPanel>
-          </AccordionItem>
+          <BootConfig />
         </Accordion>
           {/* Enable Advanced Settings:&nbsp;
           <Switch
