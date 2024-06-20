@@ -16,12 +16,13 @@ const electronHandler = {
     saveScript: (profile:Profile) => ipcRenderer.invoke('ashita:saveScript', profile),
     // TODO: change to /2
     saveProfile: (profile:Profile, settings:AshitaSettings_old) => 
-      ipcRenderer.invoke('magian:saveProfile', profile, settings),
+      ipcRenderer.invoke('magian:saveProfile', profile),
     launchAshita: (profileName:string) => {
       ipcRenderer.invoke('magian:startAshita', profileName)
     },
     ensureGit: () => ipcRenderer.invoke('magian:ensureGit') as Promise<void>,
-    getAddonData: (name: string) => ipcRenderer.invoke('ashita:getAddonData',name) as Promise<AddonData>
+    getAddonData: (name: string) => ipcRenderer.invoke('ashita:getAddonData',name) as Promise<AddonData>,
+    ensureProfiles: () => ipcRenderer.invoke('magian:ensureProfiles') as Promise<void>,    
   },
 }
 

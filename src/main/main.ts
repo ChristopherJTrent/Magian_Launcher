@@ -33,12 +33,7 @@ let mainWindow: BrowserWindow | null = null
 
 registerIPCCallbacks(ipcMain)
 
-if(!existsSync(`${PROFILE_LOCATION}\\default`)) {
-  const defaultProfile = initialProfiles.list.default
-  initializeProfile('default').then(() => {
-    return saveProfile(defaultProfile, retail(defaultProfile.name))
-  }).catch((e) => console.error(e))
-}
+
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support')
