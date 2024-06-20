@@ -19,6 +19,10 @@ export default async function handleApplicationLoad(dispatch: AppDispatch) {
       func: async () => {ipc.ensureGit()},
     },
     {
+      name: 'ensure profile presence',
+      func: async () => {ipc.ensureProfiles()}
+    },
+    {
       name: 'Update Ashita',
       func: async () => {ipc.updateAshita()},
     },
