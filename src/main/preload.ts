@@ -2,7 +2,6 @@
 /* eslint no-unused-vars: off */
 import { contextBridge, ipcRenderer} from 'electron'
 import Profile from '../lib/data/Profile'
-import { AshitaSettings_old } from '../lib/store/AshitaSettingsReducer'
 import { AddonData } from '../lib/util/helpers/getExtensionData'
 
 export type Channels = 'ipc-example';
