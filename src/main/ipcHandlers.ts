@@ -2,7 +2,7 @@ import { IpcMain, IpcMainInvokeEvent } from "electron"
 import { readdir } from "fs/promises"
 import { existsSync } from "fs"
 import updateAshita from "../lib/util/Installation/Ashita"
-import { initializeProfile, loadProfiles, saveProfile } from "../lib/util/IO/ProfileLoader"
+import { loadProfiles, saveProfile } from "../lib/util/IO/ProfileLoader"
 import {getAddonList, getPluginList} from "../lib/util/Installation/Extensions"
 import Profile from "../lib/data/Profile"
 import spawnAshita from "../lib/util/helpers/spawnAshita"
@@ -78,8 +78,6 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
           .filter(entry => entry.isDirectory())
           .filter(entry => existsSync(`${PROFILE_LOCATION}\\${entry.name}\\profile.json`))
           .length === 0) {
-            await initializeProfile('default')
-            await initializeProfile('omicron')
             await saveProfile(initialProfiles.list.default)
             return saveProfile(initialProfiles.list.omicron)
         }
