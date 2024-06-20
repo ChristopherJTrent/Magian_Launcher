@@ -30,6 +30,7 @@ export const profileSlice = createSlice({
       action.payload.forEach((v) => {
         state.list[v.name] = v
       })
+      state.currentProfile = action.payload[0].name
     },
     receiveProfile: (state:profilesMapping, action: PayloadAction<Profile>) => {
       state.list[action.payload.name] = action.payload
@@ -73,7 +74,8 @@ export const {
   setAddonEnabled, 
   setAddonDisabled,
   setPluginEnabled,
-  setPluginDisabled
+  setPluginDisabled,
+  setSettingsValue
 } = profileSlice.actions
 
 export default profileSlice.reducer
