@@ -19,6 +19,7 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
         updateAshita()
       }
     },
+
     {
       channel: 'magian:loadProfiles',
       listener: async (_) => {
@@ -27,8 +28,9 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
     },
     {
       channel: 'magian:saveProfile',
-      listener: async (_, profile:Profile, settings:AshitaSettings_old) => {
-        await saveProfile(profile, settings)
+      // TODO: change to /2
+      listener: async (_, profile:Profile) => {
+        await saveProfile(profile)
       }
     },
     {
