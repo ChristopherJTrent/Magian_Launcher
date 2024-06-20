@@ -3,7 +3,7 @@ import { existsSync } from "fs"
 import { CONFIGURATION_LOCATION, MANAGED_SCRIPT_LOCATION, PROFILE_LOCATION, SCRIPT_LOCATION } from "../Installation/paths"
 import Profile from "../../data/Profile"
 import { AshitaSettings_old } from "../../store/AshitaSettingsReducer"
-import { dumpINI } from "../Config/INIHelper"
+import { dumpAshitaSettings, dumpINI } from "../Config/INIHelper"
 import { generateManagedScript } from "../../data/Scripts"
 
 export async function loadProfiles():Promise<Profile[]> {
@@ -14,8 +14,8 @@ export async function loadProfiles():Promise<Profile[]> {
     .map(async path => JSON.parse((await readFile(path)).toString()) as Profile)
   )
 }
-// TODO: Refactor this to use the settings inside the profile
-export async function saveProfile(input:Profile, settings:AshitaSettings_old):Promise<void> {
+
+export async function saveProfile(input:Profile):Promise<void> {
   const PROFILE_DIR = `${PROFILE_LOCATION}\\${input.name}`
   if (!existsSync(PROFILE_DIR)) {
     await mkdir(PROFILE_DIR)
@@ -27,7 +27,7 @@ export async function saveProfile(input:Profile, settings:AshitaSettings_old):Pr
     await writeFile(`${PROFILE_DIR}\\profile.json`, JSON.stringify(input), { flag: 'w+'})
     await writeFile(
       `${CONFIGURATION_LOCATION}\\${input.name}.ini`, 
-      dumpINI(settings), 
+      dumpAshitaSettings(input.settings), 
       {flag: 'w+'}
     )
     await writeFile(
