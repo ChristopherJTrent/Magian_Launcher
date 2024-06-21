@@ -3,7 +3,11 @@ import { PropsWithChildren } from "react";
 
 
 export default function AccordButton({children}:PropsWithChildren) {
-  return <AccordionButton>
+  return <AccordionButton backgroundColor='rgba(255,255,255,0.02)'
+    borderTopRadius='0px'
+    _expanded={{
+      borderBottom: '2px solid rgba(255,255,255,0.1)'
+    }}>
     <Box 
       as='span' 
       flex='1' 
