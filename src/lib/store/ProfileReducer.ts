@@ -4,16 +4,16 @@ import { type RootState } from "./store"
 import { initialProfiles, profilesMapping } from "../data/DefaultProfile"
 import AshitaSettings from "../data/AshitaSettings"
 
-export const addonEnabled = (name:string) => 
+export const addonEnabled = (name:string) =>
   createSelector((state:RootState) => state.profiles,
     profiles => {
       return profiles.list[profiles.currentProfile].enabledAddons?.includes(name) ?? false
     }
 )
 
-export const pluginEnabled = (name:string) => 
+export const pluginEnabled = (name:string) =>
   createSelector((state:RootState) => state.profiles,
-    profiles => 
+    profiles =>
       profiles.list[profiles.currentProfile].enabledPlugins?.includes(name) ?? true
 )
 
@@ -36,7 +36,14 @@ export const profileSlice = createSlice({
       state.list[action.payload.name] = action.payload
     },
     removeProfile: (state:profilesMapping, action: PayloadAction<string>) => {
-      
+      const newState = {...state.list}
+      delete newState[action.payload]
+      state.list = newState
+    },
+    setActiveProfile: (state: profilesMapping, action: PayloadAction<string>) => {
+      if (Object.keys(state.list).includes(action.payload)) {
+        state.currentProfile = action.payload
+      }
     },
     setAddonEnabled: (state:profilesMapping, action:PayloadAction<string>) => {
       if(!state.list[state.currentProfile].enabledAddons.includes(action.payload)) {
@@ -47,9 +54,9 @@ export const profileSlice = createSlice({
       }
     },
     setAddonDisabled: (state:profilesMapping, action:PayloadAction<string>) => {
-      state.list[state.currentProfile].enabledAddons = 
+      state.list[state.currentProfile].enabledAddons =
         state.list[state.currentProfile].enabledAddons.filter(addon => addon !== action.payload)
-    },    
+    },
     setPluginEnabled: (state:profilesMapping, action:PayloadAction<string>) => {
       if(!state.list[state.currentProfile].enabledPlugins?.includes(action.payload)) {
         state.list[state.currentProfile].enabledPlugins = [
@@ -59,7 +66,7 @@ export const profileSlice = createSlice({
       }
     },
     setPluginDisabled: (state:profilesMapping, action:PayloadAction<string>) => {
-      state.list[state.currentProfile].enabledPlugins = 
+      state.list[state.currentProfile].enabledPlugins =
         state.list[state.currentProfile].enabledPlugins.filter(plugin => plugin !== action.payload)
     },
     setSettingsValue: (state:profilesMapping, action:PayloadAction<{field:string, value: any}>) => {
@@ -72,13 +79,14 @@ export const profileSlice = createSlice({
 })
 
 export const {
-  receiveProfiles, 
-  receiveProfile, 
-  setAddonEnabled, 
+  receiveProfiles,
+  receiveProfile,
+  setAddonEnabled,
   setAddonDisabled,
   setPluginEnabled,
   setPluginDisabled,
-  setSettingsValue
+  setSettingsValue,
+  setActiveProfile
 } = profileSlice.actions
 
 export default profileSlice.reducer
