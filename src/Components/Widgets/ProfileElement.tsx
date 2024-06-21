@@ -2,6 +2,7 @@ import { Divider, Flex, Text } from "@chakra-ui/react"
 import LaunchGameButton from "./LaunchGameButton"
 import { useAppSelector } from "../../lib/store/store"
 import TextHighlight from "./TextHighlight"
+import SetActiveProfileButton from "./SetActiveProfileButton"
 
 type ProfileElementProps = {
   profileName:string
@@ -19,9 +20,9 @@ function convertRegToWindowType(num:number) {
 
 export default function ProfileElement({profileName}:ProfileElementProps) {
   const profile = useAppSelector(state => state.profiles.list[profileName])
-  return <Flex 
-      direction='row' 
-      justifyContent='space-between' 
+  return <Flex
+      direction='row'
+      justifyContent='space-between'
       alignItems='center'
       border='2px solid rgba(0,0,0,0.3)'
       padding='5px'
@@ -41,6 +42,9 @@ export default function ProfileElement({profileName}:ProfileElementProps) {
         </Flex>
       </Flex>
     </Flex>
-    <LaunchGameButton profileName={profile.name} />
+    <Flex direction='row'>
+      <SetActiveProfileButton profileName={profile.name}/>
+      <LaunchGameButton profileName={profile.name} />
+    </Flex>
   </Flex>
 }
