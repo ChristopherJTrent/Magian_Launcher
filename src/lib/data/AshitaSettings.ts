@@ -89,11 +89,7 @@ export default class AshitaSettings {
 
   simpleCharacterCreation:settingsBoolean = false
 
-  gamma:settingsBoolean = 'useRegistry'
-
   simultaneousSfx:number = 20
-
-  lcdMode:settingsBoolean = false
 
   windowMode: number = -1
 
