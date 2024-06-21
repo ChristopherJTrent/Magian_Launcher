@@ -24,7 +24,7 @@ export async function saveProfile(input:Profile):Promise<void> {
     await mkdir(CONFIGURATION_LOCATION)
   }
   try{
-    await writeFile(`${PROFILE_DIR}\\profile.json`, JSON.stringify(input), { flag: 'w+'})
+    await writeFile(`${PROFILE_DIR}\\profile.json`, JSON.stringify(input, null, 2), { flag: 'w+'})
     await writeFile(
       `${CONFIGURATION_LOCATION}\\${input.name}.ini`, 
       dumpAshitaSettings(input.settings), 
