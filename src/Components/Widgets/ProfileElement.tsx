@@ -1,4 +1,4 @@
-import { Divider, Flex, Text } from "@chakra-ui/react"
+import { Flex, Text } from "@chakra-ui/react"
 import LaunchGameButton from "./LaunchGameButton"
 import { useAppSelector } from "../../lib/store/store"
 import TextHighlight from "./TextHighlight"
@@ -26,7 +26,9 @@ export default function ProfileElement({profileName}:ProfileElementProps) {
       alignItems='center'
       border='2px solid rgba(0,0,0,0.3)'
       padding='5px'
-      backgroundColor='rgba(255, 255, 255, 0.02)'>
+      backgroundColor='rgba(255, 255, 255, 0.02)'
+      marginBottom='5px'
+      >
     <Flex direction='column'>
       <Text fontSize='large' fontWeight='600' style={{
         textTransform:'capitalize'
