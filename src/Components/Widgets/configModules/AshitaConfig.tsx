@@ -1,19 +1,22 @@
-import { AccordionItem, AccordionPanel, Editable, EditableInput, Flex, Text } from "@chakra-ui/react"
+import { AccordionItem, AccordionPanel, Divider, Editable, EditableInput, Flex, Select, Switch, Text } from "@chakra-ui/react"
 import AccordButton from "../AccordButton"
 import { useAppDispatch, useAppSelector } from "../../../lib/store/store"
 import { currentProfile, setSettingsValue } from "../../../lib/store/ProfileReducer"
 import CustomEditablePreview from "../customEditablePreview"
 import EditableControls from "../EditableControls"
 
-export default function BootConfig() {
+export default function AshitaConfig() {
   const profile = useAppSelector(currentProfile)
   const dispatch = useAppDispatch()
-  console.log(profile)
   return <AccordionItem>
     <AccordButton>
-      Boot
+      Ashita
     </AccordButton>
     <AccordionPanel>
+      <Text fontSize='12pt' fontStyle='oblique'>
+        Boot Settings
+      </Text>
+      <Divider marginBottom='5px'/>
       {
         profile.serverType === 'private' 
         && <>
@@ -78,6 +81,22 @@ export default function BootConfig() {
               <EditableControls />
             </Flex>
         </Editable>
+      </Flex>
+      <Divider marginTop='5px' marginBottom='5px'/>
+      <Flex direction='row' align='center' justifyContent='space-between'>
+        <Text as='h2' style={{textTransform: 'capitalize'}}>Automatically&nbsp;Close&nbsp;Launcher</Text>
+        <Switch
+          isChecked={profile.settings.autocloseLauncher}
+          onChange={() => {dispatch(setSettingsValue({field: 'autocloseLauncher', value: !profile.settings.autocloseLauncher}))}} />
+      </Flex>
+      <Divider marginTop='5px' marginBottom='5px'/>
+      <Flex direction='row' align='center' justifyContent='space-between'>
+        <Select 
+            placeholder="Language"
+            onChange={(e) => {dispatch(setSettingsValue({field:'language', value:parseInt(e.target.value, 10)}))}}>
+          <option value={1}>Japanese</option>
+          <option value={2}>English</option>
+        </Select>
       </Flex>
     </AccordionPanel>
   </AccordionItem>
