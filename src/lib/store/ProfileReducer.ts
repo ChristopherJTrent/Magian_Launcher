@@ -35,6 +35,9 @@ export const profileSlice = createSlice({
     receiveProfile: (state:profilesMapping, action: PayloadAction<Profile>) => {
       state.list[action.payload.name] = action.payload
     },
+    removeProfile: (state:profilesMapping, action: PayloadAction<string>) => {
+      
+    },
     setAddonEnabled: (state:profilesMapping, action:PayloadAction<string>) => {
       if(!state.list[state.currentProfile].enabledAddons.includes(action.payload)) {
         state.list[state.currentProfile].enabledAddons = [
