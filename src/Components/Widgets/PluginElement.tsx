@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { Flex, Switch } from "@chakra-ui/react"
 import { pluginEnabled, setPluginDisabled, setPluginEnabled } from "../../lib/store/ProfileReducer"
 import { useAppDispatch } from "../../lib/store/store"
-import { changeScript } from "../../lib/store/flagsReducer"
+import { changeProfile } from "../../lib/store/flagsReducer"
 
 export type PluginElementProps = {
   plugin: string
@@ -13,7 +13,7 @@ export default function PluginElement({plugin}:PluginElementProps) {
   const dispatch = useAppDispatch()
 
   const togglePlugin = () => {
-    dispatch(changeScript())
+    dispatch(changeProfile())
     if (enabled) {
       dispatch(setPluginDisabled(plugin))
     } else {

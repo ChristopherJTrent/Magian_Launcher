@@ -1,16 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 export type flags = {
-  settingsChanged: boolean
-  scriptChanged: boolean
+  profileChanged: boolean
   loadSucceeded: boolean
   ashitaInstalled: boolean
   remainingHooks: number
 }
 
 const initialState:flags = {
-  settingsChanged: false,
-  scriptChanged: false,
+  profileChanged: false,
   loadSucceeded: false,
   ashitaInstalled: false,
   remainingHooks: 0
@@ -20,9 +18,8 @@ export const flagsSettingsSlice = createSlice({
   name: 'flags',
   initialState,
   reducers: {
-    changeSettings: (state) => {state.settingsChanged = true},
-    changeScript: (state) => {state.scriptChanged = true},
-    resetChangeScript: (state) => {state.scriptChanged = false},
+    changeProfile: (state) => {state.profileChanged = true},
+    resetChangeProfile: (state) => {state.profileChanged = false},
     loadSucceed: (state) => {state.loadSucceeded = true},
     resetLoad: (state) => {state.loadSucceeded = false},
     ashitaFound: (state) => {state.ashitaInstalled = true},
@@ -31,12 +28,11 @@ export const flagsSettingsSlice = createSlice({
 })
 
 export const {
-  changeSettings, 
-  changeScript,
-  resetChangeScript,
-  loadSucceed, 
-  resetLoad, 
-  ashitaFound, 
+  changeProfile,
+  resetChangeProfile,
+  loadSucceed,
+  resetLoad,
+  ashitaFound,
   setRemainingHooks} = flagsSettingsSlice.actions
 
 export default flagsSettingsSlice.reducer
