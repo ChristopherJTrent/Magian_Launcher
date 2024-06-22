@@ -1,18 +1,20 @@
 import { Accordion, Box } from "@chakra-ui/react"
 import AshitaConfig from "./configModules/AshitaConfig"
+import RegistryEditor from "./configModules/RegistryEditor"
 
 // TODO: Refactor this module to use the profile settings\
 
 export default function SettingsEditor() {
   return (
       <Box scrollBehavior='smooth' overflowY='scroll' height='80vh'>
-        <Accordion allowMultiple>
+        <Accordion allowMultiple marginRight='5px'>
           <AshitaConfig />
+          <RegistryEditor />
         </Accordion>
           {/* Enable Advanced Settings:&nbsp;
           <Switch
             isChecked={advanced}
-            onChange={() => setAdvanced(! advanced)} 
+            onChange={() => setAdvanced(! advanced)}
             sx={{
               '.chakra-switch__track[data-checked]': {
                 backgroundColor: '#D35547'
@@ -23,7 +25,7 @@ export default function SettingsEditor() {
               <div key={k}>
                 {(advanced || k === 'ashita') && <h2 style={{textTransform: 'capitalize'}}>{k}</h2>}
                 <Accordion allowMultiple>
-                  {Object.entries(v).map(([k1,v1]) => 
+                  {Object.entries(v).map(([k1,v1]) =>
                     { if (advanced || !advancedRows.includes(k1)) {
                       return <AccordionItem key={k1}>
                       <h2>
