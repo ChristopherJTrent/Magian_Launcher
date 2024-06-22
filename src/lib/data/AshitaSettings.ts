@@ -1,7 +1,7 @@
 
 export type settingsBoolean = (boolean | 'useRegistry');
 
-export const settingsBoolToNumber = (v:settingsBoolean):number => 
+export const settingsBoolToNumber = (v:settingsBoolean):number =>
   // eslint-disable-next-line no-nested-ternary
   v === 'useRegistry' ? -1 : v ? 1 : 0
 
@@ -97,9 +97,9 @@ export default class AshitaSettings {
 
   fontCompression:number = 2
 
-  menuResolutionX:number = this.windowResolutionX
+  menuResolutionX:number = 0
 
-  menuResolutionY:number = this.windowResolutionY
+  menuResolutionY:number = 0
 
   imeMode:settingsBoolean = 'useRegistry'
 
