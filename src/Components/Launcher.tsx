@@ -37,7 +37,7 @@ export default function Launcher() {
   }, [loader, remainingHooks, dispatch])
   return (
   <AppLayout>
-    {loader.hooks.length === 0 && 
+    {loader.hooks.length === 0 &&
     <Tabs width='100%' height='calc(100vh - 30px)' orientation="vertical"
     sx={{
       '.chakra-tabs__tablist': {
@@ -92,7 +92,7 @@ export default function Launcher() {
               }}>Settings</p>
           </Flex>
         </Tab>
-		    <Tab width='60px'>
+		    {/* <Tab width='60px'>
         <Flex direction='column'>
               <PiGameController size='large'/>
               <p style={{
@@ -100,7 +100,7 @@ export default function Launcher() {
                 fontWeight: '600'
               }}>Gamepad</p>
           </Flex>
-        </Tab>
+        </Tab> */}
       </TabList>
       <TabPanels>
         <TabPanel>

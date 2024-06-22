@@ -1,7 +1,7 @@
 import { IconButton } from "@chakra-ui/react"
 import { CiPlay1 } from 'react-icons/ci'
 import { useAppDispatch, useAppSelector } from "../../lib/store/store"
-import { resetChangeScript } from "../../lib/store/flagsReducer"
+import { resetChangeProfile } from "../../lib/store/flagsReducer"
 import { receiveHook } from "../../lib/store/loaderReducer"
 
 type LaunchGameButtonProps = {
@@ -9,7 +9,7 @@ type LaunchGameButtonProps = {
 }
 
 export default function LaunchGameButton({profileName}:LaunchGameButtonProps) {
-  const hasScriptUpdate = useAppSelector(state => state.flags.scriptChanged)
+  const hasScriptUpdate = useAppSelector(state => state.flags.profileChanged)
   const profile = useAppSelector(state => state.profiles.list[profileName])
   const dispatch = useAppDispatch()
   const launchGame = () => {
@@ -19,13 +19,13 @@ export default function LaunchGameButton({profileName}:LaunchGameButtonProps) {
         func: async () => {
           console.log('saving profile')
           window.electron.ipcRenderer.saveScript(profile)
-          dispatch(resetChangeScript())
+          dispatch(resetChangeProfile())
         }
       }))
     }
     window.electron.ipcRenderer.launchAshita(profileName)
   }
-  return <IconButton 
+  return <IconButton
     aria-label={`Launch ${profileName}`}
     icon={<CiPlay1 />}
     onClick={launchGame}

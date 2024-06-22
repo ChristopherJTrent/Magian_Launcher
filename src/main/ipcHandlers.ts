@@ -1,13 +1,15 @@
 import { IpcMain, IpcMainInvokeEvent } from "electron"
+import { readdir } from "fs/promises"
+import { existsSync } from "fs"
 import updateAshita from "../lib/util/Installation/Ashita"
 import { loadProfiles, saveProfile } from "../lib/util/IO/ProfileLoader"
 import {getAddonList, getPluginList} from "../lib/util/Installation/Extensions"
 import Profile from "../lib/data/Profile"
-import { AshitaSettings } from "../lib/store/AshitaSettingsReducer"
 import spawnAshita from "../lib/util/helpers/spawnAshita"
 import saveScript from "../lib/util/IO/ScriptLoader"
-import { ensureGit } from "../lib/util/Installation/paths"
+import { PROFILE_LOCATION, ensureGit } from "../lib/util/Installation/paths"
 import { getAddonData } from "../lib/util/helpers/getExtensionData"
+import { initialProfiles } from "../lib/data/DefaultProfile"
 
 type IPCHandler = {channel: string, listener: (event:IpcMainInvokeEvent, ...args: any[]) => Promise<any>}
 
@@ -19,6 +21,7 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
         updateAshita()
       }
     },
+
     {
       channel: 'magian:loadProfiles',
       listener: async (_) => {
@@ -27,8 +30,9 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
     },
     {
       channel: 'magian:saveProfile',
-      listener: async (_, profile:Profile, settings:AshitaSettings) => {
-        await saveProfile(profile, settings)
+      // TODO: change to /2
+      listener: async (_, profile:Profile) => {
+        await saveProfile(profile)
       }
     },
     {
@@ -65,6 +69,19 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
       channel: 'magian:ensureGit',
       listener: async (_) => {
         ensureGit()
+      }
+    },
+    {
+      channel: 'magian:ensureProfiles',
+      listener: async (_) => {
+        if((await readdir(PROFILE_LOCATION, {withFileTypes: true}))
+          .filter(entry => entry.isDirectory())
+          .filter(entry => existsSync(`${PROFILE_LOCATION}\\${entry.name}\\profile.json`))
+          .length === 0) {
+            await saveProfile(initialProfiles.list.default)
+            return saveProfile(initialProfiles.list.omicron)
+        }
+        return undefined
       }
     }
   ]

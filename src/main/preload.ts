@@ -2,7 +2,6 @@
 /* eslint no-unused-vars: off */
 import { contextBridge, ipcRenderer} from 'electron'
 import Profile from '../lib/data/Profile'
-import { AshitaSettings } from '../lib/store/AshitaSettingsReducer'
 import { AddonData } from '../lib/util/helpers/getExtensionData'
 
 export type Channels = 'ipc-example';
@@ -14,13 +13,14 @@ const electronHandler = {
     getAddons: () => ipcRenderer.invoke('ashita:getAddons') as Promise<string[]>,
     getPlugins: () => ipcRenderer.invoke('ashita:getPlugins') as Promise<string[]>,
     saveScript: (profile:Profile) => ipcRenderer.invoke('ashita:saveScript', profile),
-    saveProfile: (profile:Profile, settings:AshitaSettings) => 
-      ipcRenderer.invoke('magian:saveProfile', profile, settings),
+    saveProfile: (profile:Profile) => 
+      ipcRenderer.invoke('magian:saveProfile', profile),
     launchAshita: (profileName:string) => {
       ipcRenderer.invoke('magian:startAshita', profileName)
     },
     ensureGit: () => ipcRenderer.invoke('magian:ensureGit') as Promise<void>,
-    getAddonData: (name: string) => ipcRenderer.invoke('ashita:getAddonData',name) as Promise<AddonData>
+    getAddonData: (name: string) => ipcRenderer.invoke('ashita:getAddonData',name) as Promise<AddonData>,
+    ensureProfiles: () => ipcRenderer.invoke('magian:ensureProfiles') as Promise<void>,    
   },
 }
 

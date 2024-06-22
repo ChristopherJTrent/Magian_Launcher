@@ -1,21 +1,20 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, Box, Switch } from "@chakra-ui/react"
-import { useState } from "react"
-import SettingsRow from "./SettingsRow"
-import { RootState, useAppSelector } from "../../lib/store/store"
-import { AshitaSettings } from "../../lib/store/AshitaSettingsReducer"
+import { Accordion, Box } from "@chakra-ui/react"
+import AshitaConfig from "./configModules/AshitaConfig"
+import RegistryEditor from "./configModules/RegistryEditor"
 
-
+// TODO: Refactor this module to use the profile settings\
 
 export default function SettingsEditor() {
-  const advancedRows = ['taskpool','logging', 'resources', 'direct3d8', 'registry']
-	const settings = useAppSelector((state:RootState):AshitaSettings => state.ashitaSettings)
-	const [advanced, setAdvanced] = useState(false)
   return (
       <Box scrollBehavior='smooth' overflowY='scroll' height='80vh'>
-          Enable Advanced Settings:&nbsp;
+        <Accordion allowMultiple marginRight='5px'>
+          <AshitaConfig />
+          <RegistryEditor />
+        </Accordion>
+          {/* Enable Advanced Settings:&nbsp;
           <Switch
             isChecked={advanced}
-            onChange={() => setAdvanced(! advanced)} 
+            onChange={() => setAdvanced(! advanced)}
             sx={{
               '.chakra-switch__track[data-checked]': {
                 backgroundColor: '#D35547'
@@ -26,7 +25,7 @@ export default function SettingsEditor() {
               <div key={k}>
                 {(advanced || k === 'ashita') && <h2 style={{textTransform: 'capitalize'}}>{k}</h2>}
                 <Accordion allowMultiple>
-                  {Object.entries(v).map(([k1,v1]) => 
+                  {Object.entries(v).map(([k1,v1]) =>
                     { if (advanced || !advancedRows.includes(k1)) {
                       return <AccordionItem key={k1}>
                       <h2>
@@ -52,7 +51,7 @@ export default function SettingsEditor() {
                 </Accordion>
               </div>
             ))
-          }
+          } */}
       </Box>
   )
 }
