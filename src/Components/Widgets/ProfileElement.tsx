@@ -20,14 +20,18 @@ function convertRegToWindowType(num:number) {
 
 export default function ProfileElement({profileName}:ProfileElementProps) {
   const profile = useAppSelector(state => state.profiles.list[profileName])
+  const currentProfile = useAppSelector(state => state.profiles.currentProfile)
   return <Flex
       direction='row'
       justifyContent='space-between'
       alignItems='center'
-      border='2px solid rgba(0,0,0,0.3)'
+      border={profile.name === currentProfile ? '2px solid #D355474D' : '2px solid rgba(0,0,0,0.3)'}
       padding='5px'
       backgroundColor='rgba(255, 255, 255, 0.02)'
       marginBottom='5px'
+      style={{
+        transition: 'border-color linear 0.25s'
+      }}
       >
     <Flex direction='column'>
       <Text fontSize='large' fontWeight='600' style={{
