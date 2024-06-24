@@ -58,7 +58,7 @@ export default function Launcher() {
       <TabList>
 		    <Tab width='60px'>
           <Flex direction='column' color='inherit'>
-              <RiProfileLine size='large' color='inherit'/>
+              <RiProfileLine size='32px' color='inherit'/>
               <p style={{
                 fontSize: '6pt',
                 fontWeight: '600'
@@ -67,7 +67,7 @@ export default function Launcher() {
         </Tab>
         <Tab width='60px'>
         <Flex direction='column'>
-              <SiCplusplus size='large'/>
+              <SiCplusplus size='32px'/>
               <p style={{
                 fontSize: '6pt',
                 fontWeight: '600'
@@ -76,7 +76,7 @@ export default function Launcher() {
         </Tab>
         <Tab width='60px'>
         <Flex direction='column'>
-              <SiLua size='large'/>
+              <SiLua size='32px'/>
               <p style={{
                 fontSize: '6pt',
                 fontWeight: '600'
@@ -84,8 +84,38 @@ export default function Launcher() {
           </Flex>
         </Tab>
         <Tab width='60px'>
+          <Flex direction='column' justify='center' align='center'>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={32}
+              height={32}
+              viewBox="0 0 32 32"
+              fill="currentColor"
+              >
+              <circle cx={16} cy={16} r={14} strokeWidth='2px' stroke="currentColor" fill="transparent"/>
+              <rect x={11} y={11} width={10} height={10} strokeWidth='2px' stroke='currentColor' fill='transparent'/>
+
+              <line x1={11} y1={21} x2={9} y2={23} strokeWidth='2px' stroke="currentColor"/>
+              <line x1={9} y1={23} x2={9} y2={29} strokeWidth='2px' stroke="currentColor"/>
+              <line x1={21} y1={21} x2={23} y2={23} strokeWidth='2px' stroke="currentColor"/>
+              <line x1={23} y1={23} x2={23} y2={29} strokeWidth='2px' stroke="currentColor"/>
+
+              <line x1={11} y1={11} x2={9} y2={9} strokeWidth='2px' stroke="currentColor"/>
+              <line x1={9} y1={9} x2={9} y2={4} strokeWidth='2px' stroke="currentColor"/>
+              <line x1={21} y1={11} x2={23} y2={9} strokeWidth='2px' stroke="currentColor"/>
+              <line x1={23} y1={9} x2={23} y2={4} strokeWidth='2px' stroke="currentColor"/>
+            </svg>
+            <p style={{
+              fontSize: '6pt',
+              fontWeight: '600'
+            }}>
+              POLplugins
+            </p>
+          </Flex>
+        </Tab>
+        <Tab width='60px'>
         <Flex direction='column'>
-              <FaGear size='large'/>
+              <FaGear size='32px'/>
               <p style={{
                 fontSize: '6pt',
                 fontWeight: '600'
@@ -113,6 +143,9 @@ export default function Launcher() {
         </TabPanel>
         <TabPanel>
           <AddonListing/>
+        </TabPanel>
+        <TabPanel>
+          
         </TabPanel>
         <TabPanel>
           <SettingsEditor />
