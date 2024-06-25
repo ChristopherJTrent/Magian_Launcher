@@ -3,6 +3,7 @@ import { receiveProfiles } from "../../store/ProfileReducer"
 import { receiveAddon, receiveAddons } from "../../store/addonsReducer"
 import { LoaderHook, receiveHook, receiveHooks } from "../../store/loaderReducer"
 import { receiveplugins } from "../../store/pluginsReducer"
+import { receivePolPlugins } from "../../store/polPluginsReducer"
 import { AppDispatch, store } from "../../store/store"
 /**
  * Frontend
@@ -48,6 +49,10 @@ export default async function handleApplicationLoad(dispatch: AppDispatch) {
     {
       name: 'Load Plugins',
       func: async () => {dispatch(receiveplugins(await ipc.getPlugins()))}
+    },
+    {
+      name: 'Load Playonline Plugins',
+      func: async () => {dispatch(receivePolPlugins(await(ipc.getPolPlugins())))}
     },
   ]
   dispatch(receiveHooks(tasks))
