@@ -3,12 +3,12 @@ import { RiProfileLine } from 'react-icons/ri'
 import { SiCplusplus, SiLua } from 'react-icons/si'
 import { FaGear } from 'react-icons/fa6'
 import { useEffect } from "react"
-import AddonListing from "./Widgets/AddonListing"
+import AddonListing from "./Widgets/Tabs/Addons/AddonListing"
 import AppLayout from "./Layouts/App"
 import SettingsEditor from "./Widgets/SettingsEditor"
 import GamepadEditor from "./Widgets/GamepadEditor"
-import ProfileListing from "./Widgets/ProfileListing"
-import PluginListing from "./Widgets/PluginListing"
+import ProfileListing from "./Widgets/Tabs/Profiles/ProfileListing"
+import PluginListing from "./Widgets/Tabs/Plugins/PluginListing"
 import { useAppDispatch, useAppSelector } from "../lib/store/store"
 import handleApplicationLoad from "../lib/util/Installation/Loader"
 import { setRemainingHooks } from "../lib/store/flagsReducer"
