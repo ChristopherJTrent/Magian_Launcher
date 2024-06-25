@@ -1,7 +1,7 @@
 import { useEffect } from "react"
-import { useAppDispatch, useAppSelector } from "../../lib/store/store"
-import { receiveProfiles } from "../../lib/store/ProfileReducer"
-import ProfileElement from "./Tabs/Profiles/ProfileElement"
+import { useAppDispatch, useAppSelector } from "../../../../lib/store/store"
+import { receiveProfiles } from "../../../../lib/store/ProfileReducer"
+import ProfileElement from "./ProfileElement"
 
 
 export default function ProfileListing() {
