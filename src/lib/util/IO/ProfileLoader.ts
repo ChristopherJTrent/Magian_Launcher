@@ -2,8 +2,7 @@ import { mkdir, readFile, readdir, writeFile } from "fs/promises"
 import { existsSync } from "fs"
 import { CONFIGURATION_LOCATION, MANAGED_SCRIPT_LOCATION, PROFILE_LOCATION, SCRIPT_LOCATION } from "../Installation/paths"
 import Profile from "../../data/Profile"
-import { AshitaSettings_old } from "../../store/AshitaSettingsReducer"
-import { dumpAshitaSettings, dumpINI } from "../Config/INIHelper"
+import { dumpAshitaSettings } from "../Config/INIHelper"
 import { generateManagedScript } from "../../data/Scripts"
 
 export async function loadProfiles():Promise<Profile[]> {
@@ -26,8 +25,8 @@ export async function saveProfile(input:Profile):Promise<void> {
   try{
     await writeFile(`${PROFILE_DIR}\\profile.json`, JSON.stringify(input, null, 2), { flag: 'w+'})
     await writeFile(
-      `${CONFIGURATION_LOCATION}\\${input.name}.ini`, 
-      dumpAshitaSettings(input.settings), 
+      `${CONFIGURATION_LOCATION}\\${input.name}.ini`,
+      dumpAshitaSettings(input),
       {flag: 'w+'}
     )
     await writeFile(
@@ -41,7 +40,7 @@ export async function saveProfile(input:Profile):Promise<void> {
 export async function initializeProfile(name: string):Promise<void> {
   if (!existsSync(PROFILE_LOCATION)) {
     await mkdir(PROFILE_LOCATION)
-  }  
+  }
   if (!existsSync(`${PROFILE_LOCATION}\\${name}`)) {
     await mkdir(`${PROFILE_LOCATION}\\${name}`)
   }

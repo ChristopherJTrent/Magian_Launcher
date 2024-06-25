@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
 import { Flex, Switch } from "@chakra-ui/react"
-import { pluginEnabled, setPluginDisabled, setPluginEnabled } from "../../lib/store/ProfileReducer"
-import { useAppDispatch } from "../../lib/store/store"
-import { changeProfile } from "../../lib/store/flagsReducer"
+import { pluginEnabled, setPluginDisabled, setPluginEnabled } from "../../../../lib/store/ProfileReducer"
+import { useAppDispatch } from "../../../../lib/store/store"
+import { changeProfile } from "../../../../lib/store/flagsReducer"
 
 export type PluginElementProps = {
   plugin: string

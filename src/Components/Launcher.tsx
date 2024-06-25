@@ -2,18 +2,18 @@ import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import { RiProfileLine } from 'react-icons/ri'
 import { SiCplusplus, SiLua } from 'react-icons/si'
 import { FaGear } from 'react-icons/fa6'
-import {PiGameController} from 'react-icons/pi'
 import { useEffect } from "react"
-import AddonListing from "./Widgets/AddonListing"
+import AddonListing from "./Widgets/Tabs/Addons/AddonListing"
 import AppLayout from "./Layouts/App"
 import SettingsEditor from "./Widgets/SettingsEditor"
 import GamepadEditor from "./Widgets/GamepadEditor"
-import ProfileListing from "./Widgets/ProfileListing"
-import PluginListing from "./Widgets/PluginListing"
+import ProfileListing from "./Widgets/Tabs/Profiles/ProfileListing"
+import PluginListing from "./Widgets/Tabs/Plugins/PluginListing"
 import { useAppDispatch, useAppSelector } from "../lib/store/store"
 import handleApplicationLoad from "../lib/util/Installation/Loader"
 import { setRemainingHooks } from "../lib/store/flagsReducer"
 import { shiftHook } from "../lib/store/loaderReducer"
+import PolPluginListing from "./Widgets/PolPluginListing"
 
 export default function Launcher() {
   const remainingHooks = useAppSelector(state => state.flags.remainingHooks)
@@ -58,7 +58,7 @@ export default function Launcher() {
       <TabList>
 		    <Tab width='60px'>
           <Flex direction='column' color='inherit'>
-              <RiProfileLine size='large' color='inherit'/>
+              <RiProfileLine size='32px' color='inherit'/>
               <p style={{
                 fontSize: '6pt',
                 fontWeight: '600'
@@ -67,7 +67,7 @@ export default function Launcher() {
         </Tab>
         <Tab width='60px'>
         <Flex direction='column'>
-              <SiCplusplus size='large'/>
+              <SiCplusplus size='32px'/>
               <p style={{
                 fontSize: '6pt',
                 fontWeight: '600'
@@ -76,7 +76,7 @@ export default function Launcher() {
         </Tab>
         <Tab width='60px'>
         <Flex direction='column'>
-              <SiLua size='large'/>
+              <SiLua size='32px'/>
               <p style={{
                 fontSize: '6pt',
                 fontWeight: '600'
@@ -84,8 +84,28 @@ export default function Launcher() {
           </Flex>
         </Tab>
         <Tab width='60px'>
+          <Flex direction='column' justify='center' align='center'>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={32}
+              height={32}
+              viewBox="0 0 32 32"
+              fill="currentColor"
+              >
+              <circle cx={16} cy={16} r={14} strokeWidth='3px' stroke="currentColor" fill="transparent"/>
+              <path d="M9 5 Q15 16 9 29 M23 5 Q17 16 23 29 M5 9 Q16 15 27 9 M5 23 Q16 17 29 23" stroke='currentColor' strokeWidth='1px' fill='none'/>
+            </svg>
+            <p style={{
+              fontSize: '6pt',
+              fontWeight: '600'
+            }}>
+              POLplugins
+            </p>
+          </Flex>
+        </Tab>
+        <Tab width='60px'>
         <Flex direction='column'>
-              <FaGear size='large'/>
+              <FaGear size='32px'/>
               <p style={{
                 fontSize: '6pt',
                 fontWeight: '600'
@@ -113,6 +133,9 @@ export default function Launcher() {
         </TabPanel>
         <TabPanel>
           <AddonListing/>
+        </TabPanel>
+        <TabPanel>
+          <PolPluginListing />
         </TabPanel>
         <TabPanel>
           <SettingsEditor />

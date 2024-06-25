@@ -1,5 +1,5 @@
 import { spawnSync } from "child_process"
-import { BrowserWindow, app, dialog } from "electron"
+import { app, dialog } from "electron"
 
 export const INSTALL_LOCATION = `${app.getPath('home')}\\Magian Launcher`
 export const ASHITA_LOCATION = `${INSTALL_LOCATION}\\Ashita`
@@ -9,6 +9,7 @@ export const SCRIPT_LOCATION = `${ASHITA_LOCATION}\\scripts`
 export const MANAGED_SCRIPT_LOCATION = `${SCRIPT_LOCATION}\\managed`
 export const ADDON_LOCATION = `${ASHITA_LOCATION}\\addons`
 export const PLUGIN_LOCATION = `${ASHITA_LOCATION}\\plugins`
+export const POL_PLUGIN_LOCATION = `${ASHITA_LOCATION}\\polplugins`
 
 export function hasGit():boolean {
   const bat = spawnSync('powershell.exe',[

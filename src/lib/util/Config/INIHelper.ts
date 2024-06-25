@@ -1,5 +1,6 @@
 import {stringify, parse} from 'ini'
-import AshitaSettings, { settingsBoolToNumber } from '../../data/AshitaSettings'
+import { settingsBoolToNumber } from '../../data/AshitaSettings'
+import Profile from '../../data/Profile'
 
 export function dumpINI(object:Object):string {
   return stringify(object, {
@@ -9,7 +10,8 @@ export function dumpINI(object:Object):string {
   })
 }
 
-export function dumpAshitaSettings(settings:AshitaSettings):string {
+export function dumpAshitaSettings(input:Profile):string {
+  const { settings } = input
   const outputObject = {
     ashita: {
       launcher: {
@@ -20,7 +22,7 @@ export function dumpAshitaSettings(settings:AshitaSettings):string {
         file: settings.bootFile,
         command: settings.bootCommand,
         gamemodule: settings.bootGameModule,
-        script: settings.bootScript === '' 
+        script: settings.bootScript === ''
           ? `managed/${settings.profileName}.txt`
           : settings.bootScript,
         args: settings.bootArgs
@@ -59,7 +61,8 @@ export function dumpAshitaSettings(settings:AshitaSettings):string {
         'addons.silent': settings.silentAddons,
         'aliases.silent': settings.silentAliases,
         'plugins.silent': settings.silentPlugins
-      }
+      },
+      polplugins: input.enabledPolPlugins?.reduce((p, c) => ({...p, [c]: 1}), {})
     },
     ffxi: {
       direct3d8: {
@@ -137,7 +140,8 @@ export function dumpAshitaSettings(settings:AshitaSettings):string {
   if (outputObject.ffxi.registry.padmode000 === '-1,-1,-1,-1,-1,-1') {
     outputObject.ffxi.registry.padmode000 = '-1'
   }
-  return dumpINI(outputObject)
+
+  return dumpINI(outputObject).replaceAll('\\.', '.')
 }
 
 

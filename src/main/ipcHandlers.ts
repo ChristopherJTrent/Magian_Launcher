@@ -3,7 +3,7 @@ import { readdir } from "fs/promises"
 import { existsSync } from "fs"
 import updateAshita from "../lib/util/Installation/Ashita"
 import { loadProfiles, saveProfile } from "../lib/util/IO/ProfileLoader"
-import {getAddonList, getPluginList} from "../lib/util/Installation/Extensions"
+import {getAddonList, getPluginList, getPolPluginList} from "../lib/util/Installation/Extensions"
 import Profile from "../lib/data/Profile"
 import spawnAshita from "../lib/util/helpers/spawnAshita"
 import saveScript from "../lib/util/IO/ScriptLoader"
@@ -30,7 +30,6 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
     },
     {
       channel: 'magian:saveProfile',
-      // TODO: change to /2
       listener: async (_, profile:Profile) => {
         await saveProfile(profile)
       }
@@ -52,6 +51,10 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
       listener: async (_) => {
         return getPluginList()
       }
+    },
+    {
+      channel: 'ashita:getPolPlugins',
+      listener: async _ => getPolPluginList()
     },
     {
       channel: 'ashita:saveScript',
