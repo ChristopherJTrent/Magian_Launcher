@@ -1,6 +1,7 @@
 import { List, ListItem, Switch } from "@chakra-ui/react"
 import { useAppDispatch, useAppSelector } from "../../lib/store/store"
 import { currentProfile, disablePolPlugin, enablePolPlugin } from "../../lib/store/ProfileReducer"
+import { changeProfile } from "../../lib/store/flagsReducer"
 
 
 export default function PolPluginListing() {
@@ -8,6 +9,7 @@ export default function PolPluginListing() {
   const profile = useAppSelector(currentProfile)
   const dispatch = useAppDispatch()
   const pluginChangeHandler = (name:string) => () => {
+    dispatch(changeProfile())
     if (profile.enabledPolPlugins?.includes(name)) {
       dispatch(disablePolPlugin(name))
     } else {
