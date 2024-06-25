@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../lib/store/store"
 import handleApplicationLoad from "../lib/util/Installation/Loader"
 import { setRemainingHooks } from "../lib/store/flagsReducer"
 import { shiftHook } from "../lib/store/loaderReducer"
+import PolPluginListing from "./Widgets/PolPluginListing"
 
 export default function Launcher() {
   const remainingHooks = useAppSelector(state => state.flags.remainingHooks)
@@ -134,7 +135,7 @@ export default function Launcher() {
           <AddonListing/>
         </TabPanel>
         <TabPanel>
-
+          <PolPluginListing />
         </TabPanel>
         <TabPanel>
           <SettingsEditor />
