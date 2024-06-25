@@ -1,7 +1,7 @@
 import {  Flex, List } from "@chakra-ui/react"
 import { useAppSelector } from "../../../../lib/store/store"
 import AddonElement from "./AddonElement"
-import AddonSaveButton from "../../AddonSaveButton"
+import AddonSaveButton from "./AddonSaveButton"
 
 export default function AddonListing() {
   const addons = useAppSelector(state => state.addons)
