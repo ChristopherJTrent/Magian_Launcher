@@ -1,5 +1,6 @@
 {
   "description": "A foundation for scalable desktop apps",
+  "version": "1.0.0-alpha.1",
   "keywords": [
     "electron",
     "boilerplate",
@@ -11,26 +12,21 @@
     "hot",
     "reload"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/ChristopherJTrent/Magian_Launcher",
   "bugs": {
-    "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
+    "url": "https://github.com/ChristopherJTrent/Magian_Launcher/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
+    "url": "git+https://github.com/ChristopherJTrent/Magian_Launcher.git"
   },
   "license": "MIT",
   "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://electron-react-boilerplate.js.org"
+    "name": "Christopher Trent",
+    "email": "hello@christopher-trent.com",
+    "url": "https://christopher-trent.com"
   },
   "contributors": [
-    {
-      "name": "Amila Welihinda",
-      "email": "amilajack@gmail.com",
-      "url": "https://github.com/amilajack"
-    }
   ],
   "main": "./src/main/main.ts",
   "scripts": {
@@ -46,7 +42,8 @@
     "start:main": "cross-env NODE_ENV=development electronmon -r ts-node/register/transpile-only .",
     "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.preload.dev.ts",
     "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts",
-    "test": "jest"
+    "test": "jest",
+    "release": "electron-builder"
   },
   "browserslist": [],
   "prettier": {
@@ -195,7 +192,8 @@
       "target": [
         "nsis"
       ],
-      "requestedExecutionLevel": "asInvoker"
+      "requestedExecutionLevel": "asInvoker",
+      "publish": "github"
     },
     "directories": {
       "app": "release/app",
@@ -207,8 +205,8 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": "ChristopherJTrent",
+      "repo": "Magian_Launcher"
     }
   },
   "devEngines": {
