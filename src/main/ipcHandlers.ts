@@ -30,7 +30,6 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
     },
     {
       channel: 'magian:saveProfile',
-      // TODO: change to /2
       listener: async (_, profile:Profile) => {
         await saveProfile(profile)
       }
