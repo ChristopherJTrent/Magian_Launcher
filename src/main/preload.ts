@@ -12,15 +12,13 @@ const electronHandler = {
     loadProfiles: () => ipcRenderer.invoke('magian:loadProfiles') as Promise<Profile[]>,
     getAddons: () => ipcRenderer.invoke('ashita:getAddons') as Promise<string[]>,
     getPlugins: () => ipcRenderer.invoke('ashita:getPlugins') as Promise<string[]>,
+    getPolPlugins: () => ipcRenderer.invoke('ashita:getPolPlugins') as Promise<string[]>,
     saveScript: (profile:Profile) => ipcRenderer.invoke('ashita:saveScript', profile),
-    saveProfile: (profile:Profile) => 
-      ipcRenderer.invoke('magian:saveProfile', profile),
-    launchAshita: (profileName:string) => {
-      ipcRenderer.invoke('magian:startAshita', profileName)
-    },
+    saveProfile: (profile:Profile) => ipcRenderer.invoke('magian:saveProfile', profile),
+    launchAshita: (profileName:string) => { ipcRenderer.invoke('magian:startAshita', profileName)},
     ensureGit: () => ipcRenderer.invoke('magian:ensureGit') as Promise<void>,
     getAddonData: (name: string) => ipcRenderer.invoke('ashita:getAddonData',name) as Promise<AddonData>,
-    ensureProfiles: () => ipcRenderer.invoke('magian:ensureProfiles') as Promise<void>,    
+    ensureProfiles: () => ipcRenderer.invoke('magian:ensureProfiles') as Promise<void>,
   },
 }
 
