@@ -1,8 +1,8 @@
 import { Flex, Text } from "@chakra-ui/react"
 import LaunchGameButton from "./LaunchGameButton"
-import { useAppSelector } from "../../lib/store/store"
-import TextHighlight from "./TextHighlight"
-import SetActiveProfileButton from "./SetActiveProfileButton"
+import { useAppSelector } from "../../../../lib/store/store"
+import TextHighlight from "../../TextHighlight"
+import SetActiveProfileButton from "../../SetActiveProfileButton"
 
 type ProfileElementProps = {
   profileName:string
