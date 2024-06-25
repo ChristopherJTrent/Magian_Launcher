@@ -1,0 +1,18 @@
+{
+  "name": "magian-launcher",
+  "version": "1.0.0-alpha.1",
+  "description": "Launcher for Final Fantasy XI Online, using Ashita V4",
+  "license": "GPL-3.0-only",
+  "author": {
+    "name": "Christopher Trent",
+    "email": "hello@christopher-trent.com",
+    "url": "https://github.com/ChristopherJTrent"
+  },
+  "main": "./dist/main/main.js",
+  "scripts": {
+    "rebuild": "node -r ts-node/register ../../.erb/scripts/electron-rebuild.js",
+    "postinstall": "npm run rebuild && npm run link-modules",
+    "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts"
+  },
+  "dependencies": {}
+}
