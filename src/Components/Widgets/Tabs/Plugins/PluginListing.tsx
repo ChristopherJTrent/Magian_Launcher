@@ -1,13 +1,13 @@
 import { useEffect } from "react"
-import { useAppDispatch, useAppSelector } from "../../lib/store/store"
-import { receiveplugins } from "../../lib/store/pluginsReducer"
+import { useAppDispatch, useAppSelector } from "../../../../lib/store/store"
+import { receiveplugins } from "../../../../lib/store/pluginsReducer"
 import PluginElement from "./PluginElement"
 import AddonSaveButton from "./AddonSaveButton"
 
 export default function PluginListing() {
   const plugins = useAppSelector(state => state.plugins)
   const dispatch = useAppDispatch()
-  
+
   useEffect(() => {
     window.electron.ipcRenderer.getPlugins().then((v) => {
       return dispatch(receiveplugins(v))
