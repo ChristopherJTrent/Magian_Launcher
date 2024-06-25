@@ -74,6 +74,21 @@ export const profileSlice = createSlice({
       state.list[state.currentProfile]
         .settings[action.payload.field as keyof AshitaSettings]
         = action.payload.value
+    },
+    enablePolPlugin: (state: profilesMapping, action: PayloadAction<string>) => {
+      state.list[state.currentProfile].enabledPolPlugins ??= []
+      if (!state.list[state.currentProfile].enabledPolPlugins?.includes(action.payload)) {
+        state.list[state.currentProfile].enabledPolPlugins = [
+          ...state.list[state.currentProfile].enabledPolPlugins,
+          action.payload
+        ]
+      }
+    },
+    disablePolPlugin: (state:profilesMapping, action: PayloadAction<string>) => {
+      if (state.list[state.currentProfile].enabledPolPlugins?.includes(action.payload)) {
+        state.list[state.currentProfile].enabledPolPlugins =
+          state.list[state.currentProfile].enabledPolPlugins?.filter(plugin => plugin !== action.payload)
+      }
     }
   }
 })
@@ -86,7 +101,9 @@ export const {
   setPluginEnabled,
   setPluginDisabled,
   setSettingsValue,
-  setActiveProfile
+  setActiveProfile,
+  enablePolPlugin,
+  disablePolPlugin
 } = profileSlice.actions
 
 export default profileSlice.reducer
