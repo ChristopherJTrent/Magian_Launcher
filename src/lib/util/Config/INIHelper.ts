@@ -140,7 +140,8 @@ export function dumpAshitaSettings(input:Profile):string {
   if (outputObject.ffxi.registry.padmode000 === '-1,-1,-1,-1,-1,-1') {
     outputObject.ffxi.registry.padmode000 = '-1'
   }
-  return dumpINI(outputObject)
+
+  return dumpINI(outputObject).replaceAll('\\.', '.')
 }
 
 
