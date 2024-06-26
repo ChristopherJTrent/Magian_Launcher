@@ -22,6 +22,14 @@ const electronHandler = {
     ensureGit: () => ipcRenderer.invoke('magian:ensureGit') as Promise<void>,
     getAddonData: (name: string) => ipcRenderer.invoke('ashita:getAddonData',name) as Promise<AddonData>,
     ensureProfiles: () => ipcRenderer.invoke('magian:ensureProfiles') as Promise<void>,
+    newUpdateAshita: () => {
+      return new Promise<void>((resolve, _reject) => {
+        ipcRenderer.send('magian:legacy:installAshita')
+        ipcRenderer.on('magian:legacy:installAshita:reply', (_) => {
+          resolve()
+        })
+      })
+    }
   },
 }
 

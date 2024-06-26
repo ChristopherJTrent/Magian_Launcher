@@ -1,35 +1,34 @@
 import Addon from "../../data/Addon"
 import { receiveProfiles } from "../../store/ProfileReducer"
 import { receiveAddon, receiveAddons } from "../../store/addonsReducer"
-import { LoaderHook, receiveHook, receiveHooks } from "../../store/loaderReducer"
+import { LoaderHook, receiveHook } from "../../store/loaderReducer"
 import { receiveplugins } from "../../store/pluginsReducer"
 import { receivePolPlugins } from "../../store/polPluginsReducer"
-import { AppDispatch, store } from "../../store/store"
+import { AppDispatch } from "../../store/store"
 /**
  * Frontend
  */
-export default async function handleApplicationLoad(dispatch: AppDispatch) {
+export default async function handleApplicationLoad(dispatch: AppDispatch):Promise<LoaderHook[]> {
   dispatch(receiveAddons([]))
-  if(store.getState().flags.loadSucceeded) {
-    return
-  }
   const ipc = window.electron.ipcRenderer
-  const tasks:LoaderHook[] = [
+  return [
     {
       name: 'Ensure Git',
-      func: async () => {ipc.ensureGit()},
-    },
-    {
-      name: 'ensure profile presence',
-      func: async () => {ipc.ensureProfiles()}
+      func: async () => {return ipc.ensureGit()},
     },
     {
       name: 'Update Ashita',
-      func: async () => {ipc.updateAshita()},
+      func: async () => {
+        return ipc.newUpdateAshita()
+      },
+    },
+    {
+      name: 'ensure profile presence',
+      func: async () => {return ipc.ensureProfiles()}
     },
     {
       name: 'Load Profiles',
-      func: async () => {dispatch(receiveProfiles(await ipc.loadProfiles()))},
+      func: async () => {return dispatch(receiveProfiles(await ipc.loadProfiles()))},
     },
     {
       name: 'Load Addons',
@@ -48,12 +47,11 @@ export default async function handleApplicationLoad(dispatch: AppDispatch) {
     },
     {
       name: 'Load Plugins',
-      func: async () => {dispatch(receiveplugins(await ipc.getPlugins()))}
+      func: async () => {return dispatch(receiveplugins(await ipc.getPlugins()))}
     },
     {
       name: 'Load Playonline Plugins',
-      func: async () => {dispatch(receivePolPlugins(await(ipc.getPolPlugins())))}
+      func: async () => {return dispatch(receivePolPlugins(await(ipc.getPolPlugins())))}
     },
   ]
-  dispatch(receiveHooks(tasks))
 }

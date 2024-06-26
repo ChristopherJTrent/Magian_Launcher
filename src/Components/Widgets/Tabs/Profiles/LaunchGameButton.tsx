@@ -18,12 +18,12 @@ export default function LaunchGameButton({profileName}:LaunchGameButtonProps) {
         name: 'Save Profile',
         func: async () => {
           console.log('saving profile')
-          window.electron.ipcRenderer.saveScript(profile)
+          //window.electron.ipcRenderer.saveScript(profile)
           dispatch(resetChangeProfile())
         }
       }))
     }
-    window.electron.ipcRenderer.launchAshita(profileName)
+    //window.electron.ipcRenderer.launchAshita(profileName)
   }
   return <IconButton
     aria-label={`Launch ${profileName}`}

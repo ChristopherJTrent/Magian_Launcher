@@ -12,12 +12,17 @@ export const PLUGIN_LOCATION = `${ASHITA_LOCATION}\\plugins`
 export const POL_PLUGIN_LOCATION = `${ASHITA_LOCATION}\\polplugins`
 
 export function hasGit():boolean {
-  const bat = spawnSync('powershell.exe',[
-    '-command',
-    '(Get-Command git).path'
-  ])
+  try{
 
-  return bat.status === 0
+    const bat = spawnSync('powershell.exe',[
+      '-command',
+      '(Get-Command git).path'
+    ])
+    return bat.status === 0
+  } catch(e) {
+    return false
+  }
+
 }
 
 export function installGit() {

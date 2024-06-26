@@ -2,7 +2,8 @@ import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import { RiProfileLine } from 'react-icons/ri'
 import { SiCplusplus, SiLua } from 'react-icons/si'
 import { FaGear } from 'react-icons/fa6'
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
+import { Mutex } from "async-mutex"
 import AddonListing from "./Widgets/Tabs/Addons/AddonListing"
 import AppLayout from "./Layouts/App"
 import SettingsEditor from "./Widgets/SettingsEditor"
@@ -11,30 +12,35 @@ import ProfileListing from "./Widgets/Tabs/Profiles/ProfileListing"
 import PluginListing from "./Widgets/Tabs/Plugins/PluginListing"
 import { useAppDispatch, useAppSelector } from "../lib/store/store"
 import handleApplicationLoad from "../lib/util/Installation/Loader"
-import { setRemainingHooks } from "../lib/store/flagsReducer"
-import { shiftHook } from "../lib/store/loaderReducer"
 import PolPluginListing from "./Widgets/PolPluginListing"
 
 export default function Launcher() {
-  const remainingHooks = useAppSelector(state => state.flags.remainingHooks)
+  // const remainingHooks = useAppSelector(state => state.flags.remainingHooks)
+  const mutex = useRef(new Mutex())
   const loader = useAppSelector(state => state.loader)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    handleApplicationLoad(dispatch)
+    try{
+      handleApplicationLoad(dispatch).then((v) => {
+        return v.forEach(v1 => mutex.current.runExclusive(v1.func))
+      }).catch(() => {})
+    } catch (e) {
+      console.log(`fuck you: ${e}`)
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    if (loader.hooks.length > 0 && remainingHooks === 0) {
-      const current = loader.hooks[0]
-      dispatch(shiftHook())
-      dispatch(setRemainingHooks(1))
-      current.func().then(
-        () => dispatch(setRemainingHooks(0))
-      ).catch((_) => {})
-    }
-  }, [loader, remainingHooks, dispatch])
+  // useEffect(() => {
+  //   if (loader.hooks.length > 0 && remainingHooks === 0) {
+  //     const current = loader.hooks[0]
+  //     dispatch(shiftHook())
+  //     dispatch(setRemainingHooks(1))
+  //     current.func().then(
+  //       () => dispatch(setRemainingHooks(0))
+  //     ).catch((_) => {})
+  //   }
+  // }, [loader, remainingHooks, dispatch])
   return (
   <AppLayout>
     {loader.hooks.length === 0 &&

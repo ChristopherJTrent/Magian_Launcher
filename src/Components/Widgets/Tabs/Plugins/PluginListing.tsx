@@ -6,13 +6,13 @@ import AddonSaveButton from "../Addons/AddonSaveButton"
 
 export default function PluginListing() {
   const plugins = useAppSelector(state => state.plugins)
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    window.electron.ipcRenderer.getPlugins().then((v) => {
-      return dispatch(receiveplugins(v))
-    }).catch((_) => {})
-  }, [dispatch])
+  // useEffect(() => {
+  //   window.electron.ipcRenderer.getPlugins().then((v) => {
+  //     return dispatch(receiveplugins(v))
+  //   }).catch((_) => {})
+  // }, [dispatch])
 
   return <>
     <ul>

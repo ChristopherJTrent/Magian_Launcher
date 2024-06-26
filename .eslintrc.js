@@ -13,6 +13,7 @@ module.exports = {
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'error',
     'no-unused-vars': 'off',
+    'spaced-comment': 'off',
     semi: ['error', 'never'],
     'prettier/prettier': 0,
     '@typescript-eslint/no-unused-vars': ['error', {

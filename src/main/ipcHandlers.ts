@@ -71,7 +71,11 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
     {
       channel: 'magian:ensureGit',
       listener: async (_) => {
-        ensureGit()
+        try{
+          ensureGit()
+        } catch (err) {
+          console.log(`goddamn electron morons fuck you ${err}`)
+        }
       }
     },
     {
@@ -89,4 +93,13 @@ export default function registerIPCCallbacks(ipcMain:IpcMain):void {
     }
   ]
   handlers.forEach((v) => ipcMain.handle(v.channel, v.listener))
+  ipcMain.on('magian:legacy:installAshita', (e) => {
+    try{
+    console.log('received ashita update request')
+    // eslint-disable-next-line promise/always-return, promise/catch-or-return
+    updateAshita().then((v) => {
+      console.log(v)
+      e.reply('magian:legacy:installAshita:reply')
+    })
+  } catch(err) {console.log(`${err}`)}})
 }
