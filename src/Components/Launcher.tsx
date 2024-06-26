@@ -26,7 +26,7 @@ export default function Launcher() {
         return v.forEach(v1 => mutex.current.runExclusive(v1.func))
       }).catch(() => {})
     } catch (e) {
-      console.log(`fuck you: ${e}`)
+      console.log(`aargh: ${e}`)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
